@@ -1,0 +1,11 @@
+
+.input-group-default{
+    border-radius: 20px;
+    /* border: 1px gray solid; */
+}
+
+
+
+.input-group-default *{
+    background-color: white;
+}

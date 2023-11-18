@@ -1,0 +1,21 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<%- include('partials/head') %>
+<body class="bg-white" style="overflow: hidden;">
+    <%- include('partials/Mensagem') %>
+    <div class="container-fluid">
+        <div class="row flex-nowrap">
+            <% if( !['Login', 'Cadastrar', 'Bootstraptest'].includes(global.active)) {%>
+                <%- include('partials/header')%>
+            <% } %>
+
+            <div class="col py-3">
+                <%- body %>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="/js/user.js" ></script> 
+</body>
+</html>

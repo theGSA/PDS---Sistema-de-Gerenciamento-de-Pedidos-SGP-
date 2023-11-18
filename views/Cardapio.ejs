@@ -1,0 +1,33 @@
+<div style="height: 100vh; overflow: hidden;">
+    <div class="container-barra-pesquisa mb-2" >
+        <h3 class="text-orangered">Cardápio</h3>
+        <div class="container-search-cart">
+            <input class="form-control input-buscar" placeholder="buscar item">
+            <div class="container-carrinho">
+                <i  class="bi bi-cart align-self-center text-white p-2"></i>
+            </div>
+        </div>
+    </div>
+    <div style="height: 90%; overflow-y: auto; display: flex; flex-direction: column; gap: 1rem;">
+        <% if(Produtos && Produtos.length> 0) {
+            Categorias.forEach(categoria => { %>
+            <div>
+                <div id="categoria_container_<%= categoria.Id %>" class="container-categoria" data-bs-toggle="collapse" href="#categoria_<%= categoria.Id %>" role="button" aria-expanded="false" aria-controls="some">
+                    <%= categoria.Nome %>
+                <i class="bi-chevron-down"></i>
+            </div>
+            <div id="categoria_<%= categoria.Id %>"  style="transform: translateY(-5px);" class="collapse show container-items-cardapio">
+                <% Produtos.forEach(element=> { %>
+                <% if(element.Id_categoria == categoria.Id){%>
+                    <%- include('partials/card_produto_component', {element:element}) %>
+                <% }%>
+            <% })%>
+            </div>
+        </div>
+        <% })%>
+        <% } else{%>
+            <p class="text-secondary" >Nenhum Produto cadastrado!</p>
+        <% }%>
+        </div>
+    </div>
+</div>

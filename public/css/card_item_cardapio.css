@@ -1,0 +1,128 @@
+.container-card-item *{
+    padding: 0;
+    margin: 0;
+    position: relative;
+}
+
+.container-card-item{
+    display: flex;
+    flex-flow: row;
+    background-color: whitesmoke;
+    border-radius: 5px;
+    gap:10px;
+    padding: 10px;
+}
+
+.button-produto-adicionar{
+    /* height: min-content; */
+    align-self: end;
+    background-color: orangered;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 50px;
+    color: white;
+    box-shadow: 0px 0px 5px rgb(155, 154, 154);
+
+}
+
+.container-card-item img{
+    border-radius: 5px;
+    /* padding: 15px; */
+    width: 10vw;
+    height: 10vw;
+}
+
+.produto-descricao{
+    font-size: 0.8rem;
+}
+.container-item-conteudo{
+    display: flex;
+    flex-flow: column;
+    width: 100%;
+    justify-content: space-between;
+}
+
+
+.container-preco{
+    padding: 10px;
+    font-size: 1rem;
+    font-weight: bold;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+}
+
+.btn-minus{
+    border-radius: 15px 0 0 15px;
+    padding: 0 5px;
+    color: white;
+    font-size: 1rem;
+}
+
+
+.btn-plus{
+    padding: 0 5px;
+    font-size: 1rem;
+    border-radius: 0 15px 15px 0;
+}
+
+.container-quantidade{
+    display: flex;
+    width: fit-content;
+    /* position: absolute; */
+    align-self: end;
+    align-items: center;
+    gap: .5rem;
+}
+
+.ft-title{
+    font-weight: bold;
+    font-size: 1rem !important;
+}
+
+.input-buscar{
+    width: 100%;
+    min-width: 180px;
+}
+.container-carrinho{
+    background-color: orangered;
+    width: fit-content;
+    text-align: center;
+    padding: 5px;
+    border-radius: 50%;
+}
+
+.container-categoria{
+    background-color: rgb(255, 68, 0);
+    padding:5px;
+    width: fit-content;
+    color: white;
+    padding-right: 1.5rem;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+}   
+
+.container-items-cardapio{
+    padding: 5px;
+    background-color: orangered;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    border-radius: 10px;
+    border-top-left-radius: 0px;
+}
+
+.container-barra-pesquisa{
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.container-search-cart{
+    display: flex;
+    justify-self: flex-end;
+    gap: .5rem;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}

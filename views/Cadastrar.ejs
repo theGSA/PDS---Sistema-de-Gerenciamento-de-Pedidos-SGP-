@@ -1,0 +1,15 @@
+
+    <form class="" method="post" action="auth/Cadastrar" style="width: 100%;">
+        <div class="col-sm-4 col-11 col-md-6 col-lg-5" style="margin: 0 auto; display: flex; flex-direction: column; gap: 10px;">
+            <h2>Cadastrar</h2>
+            <input class="form-control w-100" type="text" id="Nome" value="<%= Usuario?.Nome %>" name="Nome" placeholder="Nome" required>
+            <input class="form-control" type="email" id="Email" name="Email" value="<%= Usuario?.Email %>" placeholder="e-mail" required>
+            <input class="form-control" type="tel" id="Telefone" name="Telefone" value="<%= Usuario?.Telefone %>" pattern="\(\d{2}\)\s*\d{5}-\d{4}" placeholder="telefone" required>
+            <input class="form-control" type="password" id="Password" placeholder="senha" value="<%= Usuario?.Password %>" required>
+            <input class="form-control" type="password" id="Password" name="Password" placeholder="confirma senha" value="<%= Usuario?.Password %>" required>
+
+            <button class="btn btn-primary" type="submit" >Cadastrar-se</button>
+            <a href="/Login" class="btn btn-danger">voltar</a>
+            
+        </div>
+    </form>

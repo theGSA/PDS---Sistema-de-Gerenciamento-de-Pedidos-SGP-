@@ -1,0 +1,9 @@
+
+    <h2>Bem vindo a página!</h2>
+    <b>Id: <%= Usuario?.Id %></b>
+    <b>Nome: <%= Usuario?.Nome %></b>
+    <b>Email: <%= Usuario?.Email ?? 'Sem registro' %></b>
+    <b>Senha': <%= Usuario?.Senha ?? 'Sen Registro' %></b>
+    <form action="/Auth/Logout" method="post">
+        <button type="submit" class="btn btn-danger" >Logout</button>
+    </form>

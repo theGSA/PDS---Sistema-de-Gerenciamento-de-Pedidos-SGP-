@@ -1,0 +1,31 @@
+<% if(Categoria && Categoria.length> 0) {%>
+    <table class="table table-white table-striped mt-2">
+        <thead>
+            <th>Id</th>
+            <th>Nome</th>
+            <th>Descrição</th>
+            <th>Ações</th>
+        </thead>
+        <tbody>
+            <% Categoria.forEach(element=> {%>
+                <tr>
+                    <td>
+                        <%= element.Id %>
+                    </td>
+                    <td id="item_name_<%=element.Id %>">
+                        <%= element.Nome %>
+                    </td>
+                    <td>
+                        <%= element.Descricao %>
+                    </td>
+                    <td>
+                        <i class="bi-pen btn text-primary" onclick="ShowModal('<%= element.Id %>')"></i>
+                        <i class="bi-trash btn text-danger" onclick='ShowModalDeleteItem("<%= element.Id %>")'></i>
+                    </td>
+                </tr>
+                <% }); %>
+        </tbody>
+    </table>
+    <% } else{%>
+        <p style="color: white;">Nenhum nivel cadastrado!</p>
+    <% }%>

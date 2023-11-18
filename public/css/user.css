@@ -1,0 +1,74 @@
+@import url('/css/cadastrar.css');
+@import url('/css/login.css');
+@import url('/css/footer.css');
+@import url('/css/card_item_cardapio.css');
+@import url('/bootstrap-icons/font/bootstrap-icons.min.css');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;400&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;1,100;1,300;1,400;1,500;1,700&display=swap');
+
+:root{
+    --default_color: orangered;
+}
+
+*{
+    font-family: 'Montserrat';
+    box-sizing: border-box;
+}
+
+.default-shadow{
+    box-shadow: 1px 1px 5px black;
+}
+
+.border-left-0{
+    border-left: none;
+}
+
+.border-right-0{
+    border-right: none;
+}
+
+.bg-green{
+    background-color: #3EA80C;
+    color: white;
+}
+
+.Mensagem{
+    position: absolute;
+    margin-left: auto !important;
+    margin-right: auto !important; 
+    max-width: 600px;
+    margin: 5px;
+    left: 0;
+    right: 0;
+    text-align: center;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+}
+.nav-link *{
+    color: var(--default_color) !important;
+}
+
+.bi-food-menu::before{
+    /* content: url("data:image/svg+xml, %3csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3e%3cpath fill-rule='evenodd' d='M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e"); */
+    content: url(/img/menu_icon.svg);
+}
+
+.bi-table-mesa::before{
+    /* content: url("data:image/svg+xml, %3csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3e%3cpath fill-rule='evenodd' d='M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e"); */
+    content: url(/img/table_icon.svg);
+}
+
+.rounded-4{
+    border-radius: 4rem;
+}
+
+.bg-orangered {
+    background-color: var(--default_color);
+}
+
+.text-orangered{
+    color: var(--default_color);
+}

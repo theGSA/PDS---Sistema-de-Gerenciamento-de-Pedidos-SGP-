@@ -1,0 +1,32 @@
+<div class="d-flex justify-content-between">
+    <h3 class="text-primary">Produtos</h3>
+    <a class="btn btn-primary" onclick='ShowModal()'><i class="bi-plus"></i></a>
+</div>
+<% if(Produto && Produto.length> 0) {%>
+<div class="d-flex flex-column gap-3 w-100">
+    <% Produto.forEach(element=> {%>
+        <div class="container-card-item">
+            <div class="" style="width: fit-content;">
+                <img src="/img/logo.png" alt="" >
+            </div>
+            <div class="container-item-conteudo">
+                <div class="container-produtor-descricao">
+                    <div class="ft-title"><%= element?.Nome %></div>
+                    <i class="produto-descricao"><%= element?.Descricao %></i>
+                </div>
+                <div class="container-preco">
+                    <i><%= `R$ ${element?.Valor ?? 0}` %></i>
+                </div>
+            </div>
+            <div class="container-quantidade">
+                <i class="bi-dash bg-danger btn-minus"></i>
+                <a class="text-dark text-decoration-none">2</a>
+                <i class="bi-plus bg-green btn-plus"></i>
+            </div>
+        </div>
+        <% }); %>
+        <% } else{%>
+            <p class="text-secondary" >Nenhum Produto cadastrado!</p>
+            <% }%>
+        </div>
+    
