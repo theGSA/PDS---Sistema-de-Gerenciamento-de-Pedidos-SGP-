@@ -1,7 +1,7 @@
 const {createHash} = require('crypto');
 
 class Security {
-    static secret =  "x-m7~wxx%-|)+OtGGi[wx@w(4.U|L8oUttAx|hIb%t8'.ec64rnshg-H5][{Ew:";
+    static secret =  "x-m7~wxx%-|)+OtGGi[wx@w(4.U|L8oUttAx|hIb%t8'.ec64rnshg-H5][{Ew:";//Não mudar, se naõ todos os usuarios terao que alterar a senha
     static CreateSecurity(usuario, password){
         return createHash('sha256').update(`${Security.secret}${usuario}${password}`).digest('hex');
     }

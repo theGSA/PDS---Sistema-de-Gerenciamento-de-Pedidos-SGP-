@@ -1,32 +1,39 @@
-<div class="d-flex justify-content-between">
-    <h3 class="text-primary">Produtos</h3>
-    <a class="btn btn-primary" onclick='ShowModal()'><i class="bi-plus"></i></a>
+<div class="d-flex justify-content-between p-2" >
+    <h3 class="text-orangered">Produtos</h3>
+    <button class="btn btn-primary" onclick="ShowModalByPost(this,'Produto/GetEditModal')">Novo</button>
 </div>
-<% if(Produto && Produto.length> 0) {%>
-<div class="d-flex flex-column gap-3 w-100">
-    <% Produto.forEach(element=> {%>
-        <div class="container-card-item">
-            <div class="" style="width: fit-content;">
-                <img src="/img/logo.png" alt="" >
-            </div>
-            <div class="container-item-conteudo">
-                <div class="container-produtor-descricao">
-                    <div class="ft-title"><%= element?.Nome %></div>
-                    <i class="produto-descricao"><%= element?.Descricao %></i>
-                </div>
-                <div class="container-preco">
-                    <i><%= `R$ ${element?.Valor ?? 0}` %></i>
-                </div>
-            </div>
-            <div class="container-quantidade">
-                <i class="bi-dash bg-danger btn-minus"></i>
-                <a class="text-dark text-decoration-none">2</a>
-                <i class="bi-plus bg-green btn-plus"></i>
-            </div>
-        </div>
-        <% }); %>
-        <% } else{%>
-            <p class="text-secondary" >Nenhum Produto cadastrado!</p>
-            <% }%>
-        </div>
-    
+<% if(Produtos && Produtos.length> 0) {%>
+    <table style="overflow: hidden; table-layout: fixed;"  class="table table-white table-striped mt-2">
+        <thead>
+            <th>Id</th>
+            <th>Nome</th>
+            <th>Descrição</th>
+            <th>Ações</th>
+        </thead>
+        <tbody>
+            <% Produtos.forEach(element=> {%>
+                <tr>
+                    <td>
+                        <%= element.Id %>
+                    </td>
+                    <td  id="item_name_<%=element.Id %>">
+                        <%= element.Nome %>
+                    </td>
+                    <td >
+                        R$ <%= element.Preco.toFixed(2)%>
+                    </td>
+                    <td style=" overflow-wrap: unset; white-space: nowrap; overflow: hidden; text-overflow: '...'; " >
+                        <%= element.Descricao %>
+                    </td>
+                    <td style="white-space: nowrap;">
+                        <i class="bi-pen btn text-primary" onclick="ShowModalByPost(this,'Produto/GetEditModal', '<%= element.Id %>')"></i>
+                        <i class="bi-trash btn text-danger" onclick="ShowModalByPost(this,'Produto/GetDeleteModal', '<%= element.Id %>')"></i>
+                    </td>
+                </tr>
+                <% }); %>
+        </tbody>
+    </table>
+    <% } else{%>
+        <p style="color: black;">Nenhum produto cadastrada!</p>
+    <% }%>
+    <div id="ModalContainer"></div>

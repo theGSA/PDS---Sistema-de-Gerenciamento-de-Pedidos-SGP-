@@ -16,12 +16,14 @@ const Produto = db.define('Produto',{
     Descricao:{
         type: Sequelize.STRING
     },
-    Valor: {
+    Preco: {
         type: Sequelize.FLOAT
     }
 })
 Produto.belongsTo(Categoria,{
-    foreignKey: 'id_categoria',
-    sourceKey: 'id'
+    foreignKey: 'IdCategoria',
+    sourceKey: 'Id'
 })
 db.sync();
+
+module.exports = Produto;

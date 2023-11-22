@@ -1,0 +1,20 @@
+<div class="modal fade" id="Modal" tabindex="-1" aria-labelledby="DeleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form method="POST" id="FormDelete" action="<%= Model.Rota %>">
+                <input type="hidden" id="DeleteID" name="Id" value="<%= Model?.Id %>">
+                <div class="modal-header bg-dark">
+                    <h5 class="modal-title text-light" Id="DeleteModalLabel">Deletar?</h5>
+                    <button type="button" class="btn-close bg-light" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h2 id="ModalTextDelete">Deseja deletar <span class="text-danger"><%= Model.Nome %></span>?</h2>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    <button type="submit" onClick="this.form.submit(); this.disabled=true; this.value='Sending…'; " id="ButtonDeleteClan" class="btn btn-primary">Sim</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

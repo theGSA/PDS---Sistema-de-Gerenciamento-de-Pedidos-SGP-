@@ -16,5 +16,8 @@ module.exports = db.define('Categoria',{
     Descricao:{
         type: Sequelize.STRING,
     }
-})
+},{
+    initialAutoIncrement: 1,
+}
+)
 db.sync();

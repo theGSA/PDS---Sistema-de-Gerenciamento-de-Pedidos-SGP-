@@ -60,7 +60,7 @@ class AuthController{
         res.redirect('/Login');
     }
     
-    static async ValidarCadastro(obj){
+    static async ValidarCadastro(obj, req){
 
         if(!obj.Email || obj.Email == '')
         {
@@ -82,7 +82,7 @@ class AuthController{
     }
 
     async Cadastrar(req, res){
-        if( await AuthController.ValidarCadastro(req.body) == false){
+        if( await AuthController.ValidarCadastro(req.body, req) == false){
             req.session.Usuario = req.body;
             res.redirect(Routes.GET_LOGIN_CADASTRAR);
         }

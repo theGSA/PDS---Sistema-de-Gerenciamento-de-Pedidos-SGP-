@@ -1,0 +1,11 @@
+{
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "driver": "SQLite",
+            "database": "${workspaceFolder:PDS---Sistema-de-Gerenciamento-de-Pedidos-SGP-}/Database/db.sqlite",
+            "name": "db",
+            "group": "db"
+        }
+    ]
+}

@@ -1,6 +1,7 @@
 const express = require('express');
 const expressLayout = require('express-ejs-layouts');
 
+
 const Authentication = require('./Midleware/Authentication');
 const path = require('path');
 const session = require('./Config/Session');
@@ -38,8 +39,6 @@ app.get('/Cardapio', CardapioController.Index);
 
 app.get('/Produto', ProdutoController.Index);
 
-//rotas de categoria
-app.get('/Categoria', CategoriaController.Index );
 
 app.post('/Auth', AuthController.Index);
 app.post('/Auth/SemCadastro', AuthController.SemCadastro)
@@ -52,6 +51,22 @@ app.get('/BootStrapTest', (req, res)=>{
     res.render('BootStrapTest', {Mensagem:null, Usuario:{}, layout:true});
 })
 
+//rotas get de categoria
+app.get('/Categorias', CategoriaController.Index );
+//categoria
+app.post('/Categoria/GetEditModal', CategoriaController.PostGetEditModal);
+app.post('/Categoria/GetDeleteModal', CategoriaController.PostGetDeleteModal);
+app.post('/Categoria/Cadastrar', CategoriaController.PostCadastrar);
+app.post('/Categoria/Deletar', CategoriaController.PostDeletar);
+
+//rotas get de produto
+app.get('/Produtos', ProdutoController.Index );
+//produtos
+app.post('/Produto/GetEditModal', ProdutoController.PostGetEditModal);
+app.post('/Produto/GetDeleteModal', ProdutoController.PostGetDeleteModal);
+app.post('/Produto/Cadastrar', ProdutoController.PostCadastrar);
+app.post('/Produto/Deletar', ProdutoController.PostDeletar);
+
 app.post('/', async (req, res)=>{
     const {Action} = req.body;
 
@@ -60,6 +75,14 @@ app.post('/', async (req, res)=>{
         const a  = await Usuario.destroy({where:{}})
         res.status(200).send({deletados: a});
     }
+})
+
+app.get("*",(req, res)=>{
+    res.send('<h2>A pagina não existe amigão</h2>');
+})
+
+app.post("*",(req, res)=>{
+    res.send('<h2>A pagina não existe amigão</h2>');
 })
 
 app.listen(3000, ()=>{
