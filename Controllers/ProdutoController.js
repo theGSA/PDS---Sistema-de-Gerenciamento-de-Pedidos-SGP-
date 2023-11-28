@@ -4,15 +4,14 @@ const Routes = require('../Config/Routes');
 const Produto = require('../Models/Produto');
 const { Mensagem, tipoMensagem } = require('../Models/Mensagem');
 const Categoria = require('../Models/Categoria');
+const Pages = require('../Config/Pages');
+const { Render } = require('./RenderController');
 
 class ProdutoController{
     async Index(req, res){
-        let Mensagem = req.session.Mensagem;
-        req.session.Mensagem = null;
+        const listaProdutos = await Produto.findAll({include: [{model: Categoria}]});
         
-        const listaProdutos = await Produto.findAll();
-        
-        res.render('Produto', {Mensagem: Mensagem, Usuario:req.session.user, Produtos : listaProdutos});
+        Render(req, res,Pages.PAGE_PRODUTO, {Produtos : listaProdutos});
     }
 
 
@@ -21,7 +20,7 @@ class ProdutoController{
         const produto = await Produto.findByPk(Id);
         const categorias = await Categoria.findAll();   
     
-        res.render('partials/ModalProduto', {Produto: produto, Categorias:categorias, layout: false});
+        Render(req, res,Pages.PAGE_PARTIALS_MODAL_PRODUTO, {Produto: produto, Categorias:categorias, layout: false});
     }
 
     async PostGetDeleteModal(req, res){
@@ -29,7 +28,7 @@ class ProdutoController{
         const produto = await Produto.findByPk(Id);
 
         produto.Rota = 'Produto/Deletar';
-        res.render('partials/ModalDelete', {Model: produto,  layout: false});
+        Render(req, res,Pages.PAGE_PARTIALS_MODAL_DELETAR, {Model: produto,  layout: false});
     }
 
     async PostCadastrar(req, res){

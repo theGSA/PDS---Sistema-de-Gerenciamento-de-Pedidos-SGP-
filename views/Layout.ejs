@@ -2,15 +2,17 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <%- include('partials/head') %>
-<body class="bg-white" style="overflow: hidden;">
+<body class="bg-white" style="height: 100vh;">
     <%- include('partials/Mensagem') %>
-    <div class="container-fluid">
-        <div class="row flex-nowrap">
-            <% if( !['Login', 'Cadastrar', 'Bootstraptest'].includes(global.active)) {%>
-                <%- include('partials/header')%>
+    <div class="container-fluid" style="height: 100%;">
+        <div class="row flex-nowrap" style="height: 100%;">
+            <% if(typeof(Page) != 'undefined'){%>
+                <% if( !['login', 'cadastrar'].includes(Page)) {%>
+                    <%- include('partials/header')%>
+                <% } %>
             <% } %>
 
-            <div class="col py-3">
+            <div class="col py-3" style="height: 100%;">
                 <%- body %>
             </div>
         </div>

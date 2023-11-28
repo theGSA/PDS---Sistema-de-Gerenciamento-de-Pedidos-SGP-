@@ -1,0 +1,45 @@
+<div class="modal fade rounded-5" id="Modal" tabindex="-1" aria-labelledby="EditModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form method="post" action="/Cliente/Cadastrar">
+            <div class="modal-header  bg-dark">
+                <h5 class="modal-title text-light" id="EditModalLabel"><%= Cliente?.Id ? 'Editar cliente': 'Novo Cliente' %></h5>
+                <button type="button" class="btn-close bg-white p-3 rounded-circle" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                    <div class=" d-flex justify-content-between">
+                        <div class="container-modal-id">
+                            <label for="Id">ID:</label>
+                            <input type="text" class="input-label" value="<%= Cliente?.Id.toString().padStart(4,'0') %>" id="Id" name="Id" readonly>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="Nome" class="col-form-label">Nome:</label>
+                        <input type="text" class="form-control" id="Nome" name="Nome" value="<%= Cliente?.Nome %>">
+                    </div>
+                    <div class="mb-3">
+                        <label for="Email" class="col-form-label">Email:</label>
+                        <input class="form-control" type="email" id="Email" name="Email" value="<%= Cliente?.Email %>">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="Telefone" class="col-form-label">Telefone:</label>
+                        <input class="form-control" id="Telefone" name="Telefone" value="<%= Cliente?.Telefone %>">
+                    </div>
+                    <div class="mb-3">
+                        <select class="form-select" name="Usertype" id="Usertype" value>
+                            <% const usertype = Cliente ? Cliente.Usertype: 1; 
+                                Usertype.forEach(el => { %>
+                                <option value="<%= el.Id%>" <%= el.Id == usertype ? 'selected': '' %> ><%= el.Descricao %></option>
+                            <% }); %>
+                        </select>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                <button type="submit" onclick="this.form.submit(); this.disabled=true; this.value='Sending…'; " class="btn btn-primary">Salvar</button>
+            </div>
+        </form>
+        </div>
+    </div>
+</div>

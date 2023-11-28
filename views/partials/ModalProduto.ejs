@@ -8,9 +8,9 @@
             </div>
             <div class="modal-body">
                     <div class=" d-flex justify-content-between">
-                        <div class="mb-3 p-2 pt-1 pb-1 rounded-2 text-white align-items-center" style=" background-color: var(--default_color); display: flex; flex-flow: row; gap: 1rem;">
+                        <div class="container-modal-id" >
                             <label for="Id">ID:</label>
-                            <input type="text" class="input-label" id="Id" name="Id" value="<%= Produto?.Id ?? 'Novo'%>" readonly />
+                            <input type="text" class="input-label" id="Id" name="Id" value="<%= Produto?.Id.toString().padStart(4, '0') ?? 'Novo'%>" readonly />
                         </div>
                     </div>
                     <div class="mb-3">
@@ -23,7 +23,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="Preco" class="col-form-label">Preço:</label>
-                        <input type="number" class="form-control" step='0.01' value='0.00' placeholder='0.00' id="Preco" name="Preco" value="<%= Produto?.Preco %>">
+                        <input type="number" class="form-control" step='0.01' placeholder='0.00' id="Preco" name="Preco" value="<%= Produto?.Preco.toFixed(2) ?? 0.00 %>">
                     </div>
                     <div class="mb-3">
                         <select class="form-select" name="IdCategoria" id="IdCategoria" aria-label="categorias de alimentos">
@@ -33,7 +33,7 @@
                                 </option>
                             <% }) %>
                         </select>
-                        <button type="button" onclick="ShowModalByPost(this,'Categoria/GetEditModal')" >Categoria</button>
+                        <!-- <button type="button" onclick="ShowModalByPost(this,'Categoria/GetEditModal')" >Categoria</button> -->
                     </div>
             </div>
             <div class="modal-footer">

@@ -1,10 +1,10 @@
 
-<div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-light">
-  <div class="sticky-top d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+
+  <div style="overflow: hidden; height: 100%;" class="bg-light col-2 d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white">
     <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
         <span class="d-none d-sm-inline">Menu</span>
     </a>
-    <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+    <ul style="height: 75%; overflow-y: auto; flex-flow: column nowrap;" class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
         <li>
             <a href="/Dashboard" class="nav-link px-0 align-middle">
                 <i class="fs-4 bi-speedometer2"></i>
@@ -50,10 +50,12 @@
         </li>
     </ul>
     <hr>
-    <div class="dropdown pb-4">
-        <a href="#" class="d-flex align-items-center text-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+    <div style="display: flex; height: 20%;" class="dropdown pb-4">
+        <a href="#" style="white-space: unset;"  class="d-flex align-items-center text-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
             <img src="/img/imagem_perfil_padrao.png" alt="hugenerd" width="30" height="30" class="rounded-circle">
-            <span class="d-none d-sm-inline mx-1"><%= Usuario?.Nome  %></span>
+            <div class="d-none d-sm-flex mx-1">
+                <i><%= Usuario?.Nome  %></i>
+            </div>
         </a>
         <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
             <!-- <li><a class="dropdown-item" href="#">Configurações</a></li> -->
@@ -65,4 +67,4 @@
         </ul>
     </div>
   </div>
-</div>
+

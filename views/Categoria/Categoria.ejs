@@ -1,0 +1,41 @@
+<div id="pageContent" style="overflow: hidden; height: 100%;">
+<div style="overflow: hidden; height: 100%;">
+    <div class="d-flex justify-content-between p-2" style="height: 15%;">
+        <h3 class="text-orangered">Categorias</h3>
+        <button class="btn btn-primary" onclick="ShowModalByPost(this,'Categoria/GetEditModal')">Novo</button>
+    </div>
+    <% if(Categorias && Categorias.length> 0) {%>
+        <div class="tableWrap">
+            <table >
+                <thead class="bg-dark ">
+                    <th>Id</th>
+                    <th>Nome</th>
+                    <th class="d-none d-md-table-cell">Descrição</th>
+                    <th>Ações</th>
+                </thead>
+            <tbody >
+                <% Categorias.forEach(element=> {%>
+                    <tr>
+                        <td>
+                            <%= element.Id.toString().padStart(4, '0') %>
+                        </td>
+                        <td  id="item_name_<%=element.Id %>">
+                            <%= element.Nome %>
+                        </td>
+                        <td class="d-none d-md-table-cell">
+                            <%= element.Descricao %>
+                        </td>
+                        <td>
+                            <i class="bi-pen btn text-primary" onclick="ShowModalByPost(this,'Categoria/GetEditModal', '<%= element.Id %>')"></i>
+                            <i class="bi-trash btn text-danger" onclick="ShowModalByPost(this,'Categoria/GetDeleteModal', '<%= element.Id %>')"></i>
+                        </td>
+                    </tr>
+                    <% }); %>
+            </tbody>
+        </table>
+    </div>
+        <% } else{%>
+            <p style="color: black;">Nenhuma categoria cadastrada!</p>
+        <% }%>
+    </div>
+    </div>

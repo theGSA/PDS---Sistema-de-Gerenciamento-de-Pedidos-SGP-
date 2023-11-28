@@ -1,21 +1,20 @@
 
+const Pages = require("../Config/Pages");
+const RenderController = require("./RenderController");
+const { Render } = require("./RenderController");
+
 class LoginController{
     async Index (req, res){
-        let mensagem = req.session.Mensagem;
-        req.session.Mensagem = null;
-
-        res.render('Login', {Mensagem: mensagem, Usuario:global?.Usuario});
+        await Render(req, res, Pages.PAGE_LOGIN, {});
     }
 
     async RecuperarSenha(req, res){
-        res.render('RecuperarSenha');
+        await Render(req, res, Pages.LOGIN_RECUPERAR_SENHA);
+        RenderController.Render
     }
 
     async Cadastrar(req, res){
-        let mensagem = req.session.Mensagem;
-        req.session.Mensagem = null;
-        let usuario = req.session.Usuario;
-       res.render('Cadastrar', {Usuario: usuario , Mensagem:mensagem});
+        RenderController.Render(req, res, Pages.PAGE_LOGIN_CADASTRAR, {});
     }
 }
 

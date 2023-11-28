@@ -6,7 +6,9 @@ module.exports = {
         //     return;
         let routName = req.originalUrl;
 
-        if (req.session.user || req.method == 'POST' || ['login','Bootstraptest', 'cadastrar', 'auth', 'recuperarsenha'].includes(routeName)) 
+        const bExclude = ['login','test','Bootstraptest', 'cadastrar', 'auth', 'recuperarsenha'].includes(routeName)
+
+        if (req.session.user || req.method == 'POST' || bExclude ) 
             next('route')
         else 
             res.redirect('/Login');

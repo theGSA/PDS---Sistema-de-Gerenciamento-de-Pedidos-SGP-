@@ -13,6 +13,9 @@ const HomeController = require('./Controllers/HomeController');
 const ProdutoController = require('./Controllers/ProdutoController');
 const CardapioController = require('./Controllers/CardapioController');
 const CategoriaController = require('./Controllers/CategoriaController');
+const ClienteController = require('./Controllers/ClienteController');
+const Routes = require('./Config/Routes');
+const Pages = require('./Config/Pages');
 
 const app = express(); 
 
@@ -30,29 +33,22 @@ app.use(function(req, res, next){
 app.set('view engine', 'ejs');
 app.use(expressLayout);
 
-app.get('/Login', LoginController.Index);
-app.get('/Login/RecuperarSenha', LoginController.RecuperarSenha);
-app.get('/Cadastrar', LoginController.Cadastrar)
+app.get(Routes.GET_LOGIN, LoginController.Index);
+app.get(Routes.GET_LOGIN_RECUPERAR_SENHA, LoginController.RecuperarSenha);
+app.get(Routes.GET_LOGIN_CADASTRAR, LoginController.Cadastrar)
 
 //Cardápio
-app.get('/Cardapio', CardapioController.Index);
+app.get(Routes.GET_CARDAPIO, CardapioController.Index);
 
-app.get('/Produto', ProdutoController.Index);
+app.post(Routes.POST_AUTH, AuthController.Index);
+app.post(Routes.POST_AUTH_SEM_CADASTRO, AuthController.SemCadastro)
+app.get(Routes.POST_AUTH_LOGOUT, AuthController.Logout)
+app.post(Routes.POST_AUTH_CADASTRAR, AuthController.Cadastrar)
 
-
-app.post('/Auth', AuthController.Index);
-app.post('/Auth/SemCadastro', AuthController.SemCadastro)
-app.get('/Auth/Logout', AuthController.Logout)
-app.post('/Auth/Cadastrar', AuthController.Cadastrar)
-
-app.get('/Home', HomeController.Index);
-
-app.get('/BootStrapTest', (req, res)=>{
-    res.render('BootStrapTest', {Mensagem:null, Usuario:{}, layout:true});
-})
+app.get(Routes.GET_HOME, HomeController.Index);
 
 //rotas get de categoria
-app.get('/Categorias', CategoriaController.Index );
+app.get(Routes.GET_CATEGORIAS, CategoriaController.Index );
 //categoria
 app.post('/Categoria/GetEditModal', CategoriaController.PostGetEditModal);
 app.post('/Categoria/GetDeleteModal', CategoriaController.PostGetDeleteModal);
@@ -60,12 +56,35 @@ app.post('/Categoria/Cadastrar', CategoriaController.PostCadastrar);
 app.post('/Categoria/Deletar', CategoriaController.PostDeletar);
 
 //rotas get de produto
-app.get('/Produtos', ProdutoController.Index );
+app.get(Routes.GET_PRODUTOS, ProdutoController.Index );
 //produtos
 app.post('/Produto/GetEditModal', ProdutoController.PostGetEditModal);
 app.post('/Produto/GetDeleteModal', ProdutoController.PostGetDeleteModal);
 app.post('/Produto/Cadastrar', ProdutoController.PostCadastrar);
 app.post('/Produto/Deletar', ProdutoController.PostDeletar);
+
+//rotas get de clientes
+app.get(Routes.GET_CLIENTES, ClienteController.Index );
+//clientes
+app.post('/Cliente/GetEditModal', ClienteController.PostGetEditModal);
+app.post('/Cliente/GetDeleteModal', ClienteController.PostGetDeleteModal);
+app.post('/Cliente/Cadastrar', ClienteController.PostCadastrar);
+app.post('/Cliente/Deletar', ClienteController.PostDeletar);
+
+
+app.get('/test/GetEditModal', (req, res)=>{
+    const {Id} = req.body;
+        const cliente = null;//= await Usuario.findByPk(Id);
+        
+        const Usertype = [
+            {Id:1, Descricao: 'Não cadastrado'},
+            {Id:2, Descricao: 'Cliente'},
+            {Id:3, Descricao: 'Funcionário'},
+        ]
+
+        res.render(Pages.PAGE_MODAL_CLIENTE, {Cliente: cliente,Usuario:null, Mensagem:null, Usertype:Usertype, layout: true});
+
+});
 
 app.post('/', async (req, res)=>{
     const {Action} = req.body;
@@ -85,7 +104,7 @@ app.post("*",(req, res)=>{
     res.send('<h2>A pagina não existe amigão</h2>');
 })
 
-app.listen(3000, ()=>{
+app.listen(8081, ()=>{
     console.log('Aplicação iniciada na porta 3000!');
 })
 

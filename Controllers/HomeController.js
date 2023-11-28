@@ -1,10 +1,9 @@
-const Routes = require("../Config/Routes");
+const Pages = require("../Config/Pages");
+const { Render } = require("./RenderController");
 
 class HomeController{
     async Index (req, res){
-        let mensagem = req.session.Mensagem;
-        req.session.Mensagem = null;
-        res.render('Home', { Usuario: req.session.user, Mensagem:mensagem});      
+        Render(req, res, Pages.PAGE_HOME, {});      
     }
 }
 

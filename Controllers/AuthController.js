@@ -6,6 +6,7 @@ const HomeController = require('./HomeController');
 const { Mensagem, tipoMensagem } = require('../Models/Mensagem');
 const Security = require('../Utils/security');
 const Routes = require('../Config/Routes');
+const Pages = require('../Config/Pages');
 
 
 const app = express();
@@ -36,7 +37,7 @@ class AuthController{
         const a = req.body;
 
         console.log(a.nome);
-        if(a.Nome == '' || a.Nome.length < 6)
+        if(a.Nome == '' || a.Nome.length < 4)
         {
             req.session.Mensagem = new Mensagem(tipoMensagem.ERRO, 'Informe um nome válido!');
             res.redirect('/Login');
@@ -44,14 +45,14 @@ class AuthController{
         else{
             let obj = {
                 Nome: a.Nome,
-                Type: Usertype.NAO_CADASTRADO
+                Usertype: Usertype.NAO_CADASTRADO
             }
 
             const user = await Usuario.create(obj);
             req.session.Mensagem = new Mensagem(tipoMensagem.SUCCESS, `Olá ${user.Nome}?`);
             req.session.user = user.dataValues;
             req.session.touch();
-            res.redirect('/Home');
+            res.redirect(Routes.GET_CARDAPIO);
         }
     }
     async Logout(req, res){
@@ -91,6 +92,7 @@ class AuthController{
                 Nome: req.body.Nome,
                 Email: req.body.Email,
                 Telefone: req.body.Telefone,
+                Usertype: Usertype.CLIENTE,
                 Password: await Security.CreateSecurity(req.body.Email, req.body.Password),
             }
 

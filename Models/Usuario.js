@@ -3,8 +3,9 @@ const Sequelize = require('sequelize')
 const db = require('../database/db');
 
 const Usertype = {
-    CADASTRADO: 1, 
-    NAO_CADASTRADO: 2
+    NAO_CADASTRADO: 1,
+    CLIENTE: 2,
+    FUNCIONARIO: 3,
 }
 
 const Usuario = db.define('Usuario',{
@@ -20,11 +21,15 @@ const Usuario = db.define('Usuario',{
     Email:{
         type: Sequelize.STRING
     },
+    Telefone: {
+        type: Sequelize.STRING
+    },
     Password:{
         type: Sequelize.STRING
     },
     Usertype:{
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull: false,
     }
 })
 db.sync();

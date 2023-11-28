@@ -1,17 +1,17 @@
 
 const session = require('express-session');
+const Pages = require('../Config/Pages');
 const Routes = require('../Config/Routes');
 const Categoria = require('../Models/Categoria');
 const { Mensagem, tipoMensagem } = require('../Models/Mensagem');
+const { Render } = require('./RenderController');
 
 class CategoriaController{
     async Index(req, res){
-        let Mensagem = req.session.Mensagem;
-        req.session.Mensagem = null;
         
         const listaCategorias = await Categoria.findAll();
         
-        res.render('Categoria', {Mensagem: Mensagem, Usuario:req.session.user, Categorias : listaCategorias});
+        Render(req, res,Pages.PAGE_CATEGORIA, {Mensagem: Mensagem, Usuario:req.session.user, Categorias : listaCategorias});
     }
 
 
@@ -19,14 +19,14 @@ class CategoriaController{
         const {Id} = req.body;
         const categoria = await Categoria.findByPk(Id);
     
-        res.render('partials/ModalCategoria', {Categoria: categoria, layout: false});
+        Render(req, res,Pages.PAGE_PARTIALS_MODAL_CATEGORIA, {Categoria: categoria, layout: false});
     }
 
     async PostGetDeleteModal(req, res){
         const {Id} = req.body;
         const categoria = await Categoria.findByPk(Id);
-        categoria.Rota = 'categoria/Deletar'
-        res.render('partials/ModalDelete', {Model: categoria,  layout: false});
+        categoria.Rota = Routes.POST_CATEGORIA_DELETAR;
+        Render(req, res,Pages.PAGE_PARTIALS_MODAL_DELETAR, {Model: categoria,  layout: false});
     }
 
     async PostCadastrar(req, res){
@@ -44,7 +44,7 @@ class CategoriaController{
         else
             req.session.Mensagem = new Mensagem(tipoMensagem.SUCCESS, 'Erro ao salvar categoria!');
 
-        res.redirect(Routes.POST_CATEGORIA);
+        await res.redirect(Routes.POST_CATEGORIA);
     }
 
     async PostDeletar(req, res){

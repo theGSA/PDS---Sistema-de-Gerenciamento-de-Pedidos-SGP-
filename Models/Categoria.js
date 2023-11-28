@@ -1,6 +1,7 @@
 
 const Sequelize = require('sequelize')
 const db = require('../database/db');
+const Produto = require('./Produto');
 
 
 module.exports = db.define('Categoria',{
@@ -16,8 +17,9 @@ module.exports = db.define('Categoria',{
     Descricao:{
         type: Sequelize.STRING,
     }
-},{
-    initialAutoIncrement: 1,
-}
+    },{
+        initialAutoIncrement: 1,
+    }
 )
+
 db.sync();

@@ -6,12 +6,9 @@ const { Mensagem, tipoMensagem } = require('../Models/Mensagem');
 
 class MesaController{
     async Index(req, res){
-        let Mensagem = req.session.Mensagem;
-        req.session.Mensagem = null;
-        
         const listaMesas = await Mesa.findAll();
         
-        res.render('Mesa', {Mensagem: Mensagem, Usuario:req.session.user, Mesas : listaMesas});
+        res.render('Mesa', {Mesas : listaMesas});
     }
 
 
