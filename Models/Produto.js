@@ -2,6 +2,7 @@
 const Sequelize = require('sequelize');
 const db = require('../database/db');
 const Categoria = require('./Categoria');
+const sequelize = require('../database/db');
 
 const Produto = db.define('Produto',{
     Id: {
@@ -18,6 +19,15 @@ const Produto = db.define('Produto',{
     },
     Preco: {
         type: Sequelize.FLOAT
+    },
+    Imagem:{
+        type: Sequelize.BLOB
+    },
+    TipoImagem: {
+        type: Sequelize.TEXT
+    },
+    NomeImagem : {
+        type: Sequelize.TEXT
     }
 })
 Produto.belongsTo(Categoria,{

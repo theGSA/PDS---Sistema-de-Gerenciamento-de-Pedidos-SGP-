@@ -6,6 +6,7 @@ const { Mensagem, tipoMensagem } = require('../Models/Mensagem');
 const Categoria = require('../Models/Categoria');
 const Pages = require('../Config/Pages');
 const { Render } = require('./RenderController');
+const { BlobToBase64Content } = require('../Utils/Utils');
 
 class ProdutoController{
     async Index(req, res){
@@ -18,7 +19,13 @@ class ProdutoController{
     async PostGetEditModal(req, res){
         const {Id} = req.body;
         const produto = await Produto.findByPk(Id);
-        const categorias = await Categoria.findAll();   
+        const categorias = await Categoria.findAll();
+        
+        if(produto && produto.Imagem)
+        {
+            //gera o base 64 da imagem
+            produto.Imagem64 = `data:${produto.TipoImagem};base64, ${BlobToBase64Content(produto.Imagem)}`;
+        }
     
         Render(req, res,Pages.PAGE_PARTIALS_MODAL_PRODUTO, {Produto: produto, Categorias:categorias, layout: false});
     }
@@ -35,6 +42,21 @@ class ProdutoController{
         const {Id} = req.body;
 
         var objRes = null;
+
+        if(req.files && req.files.Imagem){
+            req.body.Imagem = req.files.Imagem.data;
+            req.body.NomeImage = req.files.Imagem.name;
+            req.body.TipoImagem = req.files.Imagem.mimetype;
+        }
+        else if(Id > 0){
+            const p = await Produto.findByPk(Id);
+            req.body.Imagem = p.Imagem;
+            req.body.NomeImage = p.NomeImage;
+            req.body.TipoImagem = p.TipoImagem;
+        }
+
+        console.log(req.body.Imagem);
+
         if(Id > 0)
             objRes = await Produto.update(req.body, {where:{Id: Id}});
         else{

@@ -1,2 +1,1 @@
-
-DROP table Usuario2
+SELECT * FROm Produto

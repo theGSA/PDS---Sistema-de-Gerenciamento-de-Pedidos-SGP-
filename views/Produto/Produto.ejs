@@ -28,7 +28,7 @@
                     <i style="font-style: normal; font-size: xx-small; color: gray;"><%= element.Categorium?.Nome %></i>               
                     </td>
                     <td>
-                        R$ <%= element.Preco.toFixed(2)%>
+                        R$ <%= element.Preco ? element.Preco.toFixed(2) : 0.00 %>
                     </td>
                     <td  class="d-none d-md-table-cell" >
                         <%= element.Descricao %>

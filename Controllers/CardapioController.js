@@ -2,12 +2,10 @@ const Pages = require("../Config/Pages");
 const RenderController = require("./RenderController");
 const Categoria = require('../Models/Categoria');
 const Produto = require('../Models/Produto');
+const { BlobToBase64Content } = require("../Utils/Utils");
 
 class CardapioController{
-    async Index(req, res){
-       
-        const listaProduto = [];
-        const categorias = ["Carnes e Frangos", "Bebidas", "Saladas", "Peixes e Frutos do Mar", "Risotos", "Hamburgueres" ]
+    async Index(req, res){       
         const _listaCategorias = await Categoria.findAll();
         const listaCategorias = [];
 
@@ -16,32 +14,18 @@ class CardapioController{
             const objCategoria = element.dataValues;
             objCategoria.Produtos = obj;
 
-            if(objCategoria.Produtos != null && objCategoria.Produtos.length > 0)
+            if(objCategoria.Produtos != null && objCategoria.Produtos.length > 0){
+                for(var produto of objCategoria.Produtos)
+                {
+                    if(produto.Imagem)
+                    {
+                        produto.Imagem64 = `data:${produto.TipoImagem};base64, ${BlobToBase64Content(produto.Imagem)}`;
+                    }
+                }
                 listaCategorias.push(objCategoria);
+            }
         }
         
-
-        var a = '';
-
-        // for(var j = 1; j < categorias.length; j++)
-        // {
-        //     listaCategorias.push({
-        //         Id : j,
-        //         Nome: categorias.at(j-1)
-        //     })
-        // }
-
-        // for(var i = 1; i < 10; i++)
-        // {
-        //     var produto={
-        //         Id: i,
-        //         Nome: `nome_${i}`,
-        //         Descricao: `Essa é uma descrição do produto ${i}`,
-        //         Id_categoria: Math.round(Math.random() * 5 +1),
-        //         Valor: 10.00
-        //     }
-        //     listaProduto.push(produto);
-        // }
        RenderController.Render(req, res, Pages.PAGE_CARDAPIO,{Categorias : listaCategorias});
     }
 }

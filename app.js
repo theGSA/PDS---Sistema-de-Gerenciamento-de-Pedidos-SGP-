@@ -1,6 +1,6 @@
 const express = require('express');
 const expressLayout = require('express-ejs-layouts');
-
+const fileUpload = require('express-fileupload')
 
 const Authentication = require('./Midleware/Authentication');
 const path = require('path');
@@ -20,9 +20,10 @@ const Pages = require('./Config/Pages');
 const app = express(); 
 
 app.use(express.json());
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'node_modules')));
+app.use(fileUpload());
 app.use(session);
 app.use(Authentication.isAuthenticated);
 app.use(function(req, res, next){
@@ -38,6 +39,7 @@ app.get(Routes.GET_LOGIN_RECUPERAR_SENHA, LoginController.RecuperarSenha);
 app.get(Routes.GET_LOGIN_CADASTRAR, LoginController.Cadastrar)
 
 //Cardápio
+app.get('/', CardapioController.Index);
 app.get(Routes.GET_CARDAPIO, CardapioController.Index);
 
 app.post(Routes.POST_AUTH, AuthController.Index);

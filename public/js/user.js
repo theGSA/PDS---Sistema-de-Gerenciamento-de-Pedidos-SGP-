@@ -1,6 +1,5 @@
 
 async function ShowModalByPost(ele, rota, itemID){
-    console.log(ele);
         if(ele) ele.disabled = true;
 
         fetch(`/${rota}`,{
@@ -15,12 +14,11 @@ async function ShowModalByPost(ele, rota, itemID){
         })
         .then(T =>  T.text())
         .then(T =>{
-            console.log(T);
             ShowModal(T);
             if(ele)  ele.disabled = false;
         })
         .catch(e =>{
-            console.log(e);
+            console.log('erro: '+e);
         })
     }
 
@@ -44,11 +42,9 @@ async function ShowModalByPost(ele, rota, itemID){
     const pageContent  = document.querySelector('#pageContent');
     const content = document.querySelector("#content");
 
-    new ResizeObserver(() =>{
+    if(!Object.is(pageContent, null) && !Object.is(header, null) && !Object.is(content, null)){
 
-        if(Object.is(pageContent, null) || Object.is(header, null) ||Object.is(content, null))
-            return;
-
+        new ResizeObserver(() =>{
         console.log( header.clientWidth + ' ' + header.clientHeight);
         console.log( pageContent.clientWidth + ' ' + pageContent.clientHeight);
 
@@ -57,3 +53,20 @@ async function ShowModalByPost(ele, rota, itemID){
         // content.style.overflowY = 'auto';
     }
     ).observe(header);
+}
+
+//dispara o para mostrar imagem quando busca no computador
+function RefreshImage(element)
+{
+    const file = element.files[0]; 
+    const ImgContainer = document.querySelector(element.dataset.showin);
+    if(ImgContainer && element != null)
+    {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            ImgContainer.src = e.target.result;
+            NomeImagem.value = imageInput.files[0].name;
+        }
+        reader.readAsDataURL(file);
+    }
+}

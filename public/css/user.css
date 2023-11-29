@@ -95,6 +95,7 @@
     display: flex; 
     flex-flow: row; 
     gap: 1rem;
+    height: min-content;
 }
 
 .btn{
