@@ -5,7 +5,7 @@ const fileUpload = require('express-fileupload')
 const Authentication = require('./Midleware/Authentication');
 const path = require('path');
 const session = require('./Config/Session');
-const {Usuario} = require('./Models/Usuario');
+const {Usuario, Usertype} = require('./Models/Usuario');
 
 const LoginController = require('./Controllers/LoginController');
 const AuthController = require('./Controllers/AuthController');
@@ -33,6 +33,9 @@ app.use(function(req, res, next){
 
 app.set('view engine', 'ejs');
 app.use(expressLayout);
+global.Usertype = Usertype;
+
+
 
 app.get(Routes.GET_LOGIN, LoginController.Index);
 app.get(Routes.GET_LOGIN_RECUPERAR_SENHA, LoginController.RecuperarSenha);
@@ -99,11 +102,11 @@ app.post('/', async (req, res)=>{
 })
 
 app.get("*",(req, res)=>{
-    res.send('<h2>A pagina não existe amigão</h2>');
+    res.send('<h2>A página não existe!</h2>');
 })
 
 app.post("*",(req, res)=>{
-    res.send('<h2>A pagina não existe amigão</h2>');
+    res.send('<h2>A página não existe!</h2>');
 })
 
 app.listen(8081, ()=>{

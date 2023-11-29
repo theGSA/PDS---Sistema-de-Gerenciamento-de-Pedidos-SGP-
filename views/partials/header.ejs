@@ -1,5 +1,5 @@
 
-
+<% if(Usuario?.Usertype == Usertype.FUNCIONARIO) {%>
   <div style="overflow: hidden; height: 100%;" class="bg-light col-2 d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white">
     <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
         <span class="d-none d-sm-inline">Menu</span>
@@ -67,4 +67,5 @@
         </ul>
     </div>
   </div>
+  <% } %>
 
