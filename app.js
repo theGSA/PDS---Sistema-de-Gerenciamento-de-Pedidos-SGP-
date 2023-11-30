@@ -51,6 +51,8 @@ app.post(Routes.POST_AUTH, AuthController.Index);
 app.post(Routes.POST_AUTH_SEM_CADASTRO, AuthController.SemCadastro)
 app.get(Routes.POST_AUTH_LOGOUT, AuthController.Logout)
 app.post(Routes.POST_AUTH_CADASTRAR, AuthController.Cadastrar)
+app.post(Routes.POST_AUTH_RECUPERAR_SENHA, AuthController.RecuperarSenha)
+
 
 app.get(Routes.GET_HOME, HomeController.Index);
 

@@ -18,7 +18,7 @@ module.exports = {
     POST_AUTH_SEM_CADASTRO: '/Auth/SemCadastro',
     POST_AUTH_LOGOUT: '/Auth/Logout',
     POST_AUTH_CADASTRAR: '/Auth/Cadastrar',
-    
+    POST_AUTH_RECUPERAR_SENHA:  '/Auth/RecuperarSenha',
     //post categoria
     POST_CATEGORIA: '/Categorias',
     POST_CATEGORIA_CADASTRAR: '/Categoria/Cadastrar',

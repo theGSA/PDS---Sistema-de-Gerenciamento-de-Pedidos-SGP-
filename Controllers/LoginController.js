@@ -1,4 +1,5 @@
 
+const { render } = require("ejs");
 const Pages = require("../Config/Pages");
 const RenderController = require("./RenderController");
 const { Render } = require("./RenderController");
@@ -9,8 +10,7 @@ class LoginController{
     }
 
     async RecuperarSenha(req, res){
-        await Render(req, res, Pages.LOGIN_RECUPERAR_SENHA);
-        RenderController.Render
+        await Render(req, res, Pages.PAGE_LOGIN_RECUPERAR_SENHA, {});
     }
 
     async Cadastrar(req, res){

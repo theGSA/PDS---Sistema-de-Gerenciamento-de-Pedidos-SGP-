@@ -7,6 +7,9 @@ const { Mensagem, tipoMensagem } = require('../Models/Mensagem');
 const Security = require('../Utils/security');
 const Routes = require('../Config/Routes');
 const Pages = require('../Config/Pages');
+const session = require('express-session');
+const { render } = require('ejs');
+const { Render } = require('./RenderController');
 
 
 const app = express();
@@ -107,6 +110,28 @@ class AuthController{
                 res.redirect(Routes.GET_LOGIN_CADASTRAR);
             })
         }
+    }
+    async RecuperarSenha(req, res){
+        const elapsedtime = (Date.now() - req.session.tempoUltimoEmail);
+
+        //verifica o tempo do ultimo request para nao enviar a vários emails;
+        if(req.session.tempoUltimoEmail && elapsedtime < 60000)
+        {
+            req.session.Mensagem = new Mensagem(tipoMensagem.ERRO, "Aguarde para fazer uma nova requisição!");
+        }
+        else{            
+            const {Email} = req.body;
+            const client =  await Usuario.findOne({where:{Email:Email}});
+            
+            if(client){
+                req.session.Mensagem = new Mensagem(tipoMensagem.SUCCESS, "Email de recuperação enviado!");
+                req.session.tempoUltimoEmail = Date.now();
+            }
+            else{
+                req.session.Mensagem = new Mensagem(tipoMensagem.ERRO, "Email não cadastrado!");
+            }
+        }
+        res.redirect(Routes.GET_LOGIN_RECUPERAR_SENHA);
     }
 }
 
