@@ -131,7 +131,7 @@ app.post("*",(req, res)=>{
 })
 
 app.listen(8081, ()=>{
-    console.log('Aplicação iniciada na porta 3000!');
+    console.log('Aplicação iniciada na porta 8081!');
 })
 
 

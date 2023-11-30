@@ -79,3 +79,12 @@ const handlePhone = (event) => {
     value = value.replace(/(\d)(\d{4})$/,"$1-$2")
     return value
   }
+
+  function mostrarSenha() {
+    var x = document.getElementById("Password");
+    if (x.type === "password") {
+      x.type = "text";
+    } else {
+      x.type = "password";
+    }
+  }

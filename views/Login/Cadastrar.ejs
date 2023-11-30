@@ -5,9 +5,11 @@
             <input class="form-control w-100" type="text" id="Nome" value="<%= Usuario?.Nome %>" name="Nome" placeholder="Nome completo" required>
             <input class="form-control" type="email" id="Email" name="Email" value="<%= Usuario?.Email %>" placeholder="E -mail" required>
             <input class="form-control" type="tel" id="Telefone" maxlength="15" name="Telefone" value="<%= Usuario?.Telefone %>" pattern="\(\d{2}\)\s*\d{5}-\d{4}" placeholder="Telefone com DDD" onkeyup="handlePhone(event)" required>
-            <input class="form-control" type="password" placeholder="Senha de acesso" value="<%= Usuario?.Password %>" required>
-            <input class="form-control" type="password" id="Password" name="Password" placeholder="Digite a senha novamente" value="<%= Usuario?.Password %>" required>
-
+            <p>
+                <input class="form-control" type="password" id="Password" name="Password" placeholder="Senha de acesso" value="<%= Usuario?.Password %>" required>
+                <input type="checkbox" onclick="mostrarSenha()">Exibir senha
+            </p>
+         <!--   <input class="form-control" type="password" id="Password" name="Password" placeholder="Digite a senha novamente" value="<%= Usuario?.Password %>" required> -->
             <button class="btn btn-primary" type="submit" >Concluir cadastro</button>
             <a href="/Login" class="btn btn-danger">Voltar</a>
             
