@@ -22,7 +22,7 @@ class AuthController{
         const _user = await Usuario.findOne( {where:{Email: Email ?? '', Password: securePassword}});
 
         if(_user == null){
-            req.session.Mensagem = new Mensagem(tipoMensagem.ERRO, 'usuário ou senha inválidos!');
+            req.session.Mensagem = new Mensagem(tipoMensagem.ERRO, 'Usuário ou senha inválidos!');
             req.session.Usuario = req.body;
             res.redirect(Routes.GET_LOGIN);
         }
@@ -49,7 +49,7 @@ class AuthController{
             }
 
             const user = await Usuario.create(obj);
-            req.session.Mensagem = new Mensagem(tipoMensagem.SUCCESS, `Olá ${user.Nome}?`);
+            req.session.Mensagem = new Mensagem(tipoMensagem.SUCCESS, `Bem vindo(a) ${user.Nome}`);
             req.session.user = user.dataValues;
             req.session.touch();
             res.redirect(Routes.GET_CARDAPIO);
@@ -57,7 +57,7 @@ class AuthController{
     }
     async Logout(req, res){
         req.session.user = null;
-        req.session.Mensagem =  new Mensagem(tipoMensagem.SUCCESS,  'Deslogado com sucesso!');
+        req.session.Mensagem =  new Mensagem(tipoMensagem.SUCCESS,  'Volte sempre!');
         res.redirect('/Login');
     }
     
@@ -65,17 +65,17 @@ class AuthController{
 
         if(!obj.Email || obj.Email == '')
         {
-            req.session.Mensagem = new Mensagem(tipoMensagem.ERRO, 'Campo E-mail não preenchido!');
+            req.session.Mensagem = new Mensagem(tipoMensagem.ERRO, 'Preencha o campo e-mail!');
             return false;
         }
         if(!Utils.validateEmail(obj.Email)){
-            req.session.Mensagem = new Mensagem(tipoMensagem.ERRO, 'O E-mail não é válido!');
+            req.session.Mensagem = new Mensagem(tipoMensagem.ERRO, 'O e-mail informado não é válido!');
             return false;
         }
 
         if(await Usuario.findOne({where:{Email:obj.Email}}))
         {
-            req.session.Mensagem = new Mensagem(tipoMensagem.ERRO, 'O E-mail já cadastrado!');
+            req.session.Mensagem = new Mensagem(tipoMensagem.ERRO, 'Este e-mail já foi cadastrado!');
             return false;
         }
 
@@ -102,7 +102,7 @@ class AuthController{
                 res.redirect(Routes.GET_LOGIN);
              })
              .catch(err=>{
-                req.session.Mensagem = new Mensagem(tipoMensagem.ERRO, 'Erro ao salvar cadastro, fale com administrador!');
+                req.session.Mensagem = new Mensagem(tipoMensagem.ERRO, 'Erro ao finalizar cadastro. Entre em contato com o administrador do sistema.');
                 res.redirect(Routes.GET_LOGIN_CADASTRAR);
             })
         }
