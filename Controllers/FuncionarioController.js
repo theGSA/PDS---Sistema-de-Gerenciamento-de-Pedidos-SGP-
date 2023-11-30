@@ -39,7 +39,7 @@ class FuncionarioController{
     async PostGetDeleteModal(req, res){
         const {Id} = req.body;
         const funcionario = await Usuario.findByPk(Id);
-        funcionario.Rota = Routes.POST_CLIENTE_DELETAR;
+        funcionario.Rota = Routes.POST_FUNCIONARIO_DELETAR;
         Render(req, res,Pages.PAGE_PARTIALS_MODAL_DELETAR, {Model: funcionario,  layout: false});
     }
 
@@ -54,9 +54,9 @@ class FuncionarioController{
             objRes = await Usuario.create(req.body);
         }
         if(objRes)
-            req.session.Mensagem = new Mensagem(tipoMensagem.SUCCESS, 'Funcionario atualizado com sucesso!');
+            req.session.Mensagem = new Mensagem(tipoMensagem.SUCCESS, 'Funcionário atualizado com sucesso!');
         else
-            req.session.Mensagem = new Mensagem(tipoMensagem.SUCCESS, 'Erro ao salvar funcionario!');
+            req.session.Mensagem = new Mensagem(tipoMensagem.ERRO, 'Erro ao salvar funcionário!');
 
         res.redirect(Routes.GET_FUNCIONARIOS);
     }

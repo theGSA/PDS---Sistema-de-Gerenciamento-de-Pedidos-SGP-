@@ -1,37 +1,36 @@
 <div id="pageContent" style="overflow: hidden; height: 100%;">
 <div id="header" class="container-barra-pesquisa mb-2" >
-    <h3 class="text-orangered">Funcionários</h3>
+    <h3 class="text-orangered">Mesas</h3>
     <div class="container-search-cart">
         <!-- <input class="form-control input-buscar" placeholder="buscar cliente"> -->
-        <!-- <button class="btn btn-primary" onclick="ShowModalByPost(this,'Cliente/GetEditModal')">Novo</button> -->
+        <button class="btn btn-primary" onclick="ShowModalByPost(this,'Mesa/GetEditModal')">Novo</button>
     </div>
 </div>
 
-<% 
-if(Funcionarios && Funcionarios.length> 0) {%>
+<% if(Mesas && Mesas.length> 0) {%>
     <div id="content" class="tableWrap">
         <table class="mt-2">
             <thead>
             <th>Id</th>
-            <th>Nome</th>
-            <th class="d-none d-md-table-cell">E-mail</th>
+            <th>Número</th>
+            <th class="d-none d-md-table-cell">Cadeiras</th>
             <th>Ações</th>
         </thead>
         <tbody>
-            <% Funcionarios.forEach(element=> {%>
+            <% Mesas.forEach(element=> {%>
                 <tr>
                     <td>
                         <%= element.Id.toString().padStart(5, '0') %>
                     </td>
                     <td  id="item_name_<%=element.Id %>">
-                        <%= element.Nome %>
+                        <%= element.Numero %>
                     </td>
                     <td class="d-none d-md-table-cell" style="white-space: nowrap; overflow: hidden; max-height: 50px !important; text-overflow: ellipsis;">
-                        <%= element.Email %>
+                        <%= element.Cadeiras %>
                     </td>
                     <td >
-                        <i class="bi-pen btn text-primary" onclick="ShowModalByPost(this,'Cliente/GetEditModal', '<%= element.Id %>')"></i>
-                        <i class="bi-trash btn text-danger" onclick="ShowModalByPost(this,'Cliente/GetDeleteModal', '<%= element.Id %>')"></i>
+                        <i class="bi-pen btn text-primary" onclick="ShowModalByPost(this,'Mesa/GetEditModal', '<%= element.Id %>')"></i>
+                        <i class="bi-trash btn text-danger" onclick="ShowModalByPost(this,'Mesa/GetDeleteModal', '<%= element.Id %>')"></i>
                     </td>
                 </tr>
                 <% }); %>
@@ -39,6 +38,6 @@ if(Funcionarios && Funcionarios.length> 0) {%>
     </table>
 </div>
     <% } else{%>
-        <p style="color: black;">Nenhum funcionário cadastrada!</p>
+        <p style="color: black;">Nenhuma mesa cadastrada!</p>
     <% }%>
 </div>
