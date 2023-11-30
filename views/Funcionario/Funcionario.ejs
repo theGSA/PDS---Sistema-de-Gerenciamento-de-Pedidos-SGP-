@@ -30,8 +30,8 @@ if(Funcionarios && Funcionarios.length> 0) {%>
                         <%= element.Email %>
                     </td>
                     <td >
-                        <i class="bi-pen btn text-primary" onclick="ShowModalByPost(this,'Cliente/GetEditModal', '<%= element.Id %>')"></i>
-                        <i class="bi-trash btn text-danger" onclick="ShowModalByPost(this,'Cliente/GetDeleteModal', '<%= element.Id %>')"></i>
+                        <i class="bi-pen btn text-primary" onclick="ShowModalByPost(this,'Funcionario/GetEditModal', '<%= element.Id %>')"></i>
+                        <i class="bi-trash btn text-danger" onclick="ShowModalByPost(this,'Funcionario/GetDeleteModal', '<%= element.Id %>')"></i>
                     </td>
                 </tr>
                 <% }); %>

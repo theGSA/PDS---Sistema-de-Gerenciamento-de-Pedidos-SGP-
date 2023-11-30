@@ -66,7 +66,7 @@ class ProdutoController{
         if(objRes)
             req.session.Mensagem = new Mensagem(tipoMensagem.SUCCESS, `Produto ${ Id > 0 ? 'atualizado': 'cadastrado'} com sucesso!`);
         else
-            req.session.Mensagem = new Mensagem(tipoMensagem.SUCCESS, 'Erro ao salvar produto!');
+            req.session.Mensagem = new Mensagem(tipoMensagem.ERRO, 'Erro ao salvar produto!');
 
         res.redirect(Routes.POST_PRODUTO);
     }

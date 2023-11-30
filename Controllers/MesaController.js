@@ -1,33 +1,42 @@
 
 
+const Pages = require('../Config/Pages');
 const Routes = require('../Config/Routes');
 const Mesa = require('../Models/Mesa');
 const { Mensagem, tipoMensagem } = require('../Models/Mensagem');
+const { Render } = require('./RenderController');
 
 class MesaController{
     async Index(req, res){
+          
         const listaMesas = await Mesa.findAll();
-        
-        res.render('Mesa', {Mesas : listaMesas});
+    
+        Render(req, res,Pages.PAGE_MESA, {Mesas : listaMesas});
     }
 
 
     async PostGetEditModal(req, res){
         const {Id} = req.body;
         const mesa = await Mesa.findByPk(Id);
-    
-        res.render('partials/ModalMesa', {Mesa: mesa, layout: false});
+        
+        const Usertype = [
+            {Id:1, Descricao: 'Não cadastrado'},
+            {Id:2, Descricao: 'Cliente'},
+            {Id:3, Descricao: 'Mesa'},
+        ]
+
+        Render(req, res, Pages.PAGE_MODAL_MESA, {Mesa: mesa, Usertype:Usertype, layout: false});
     }
 
     async PostGetDeleteModal(req, res){
         const {Id} = req.body;
         const mesa = await Mesa.findByPk(Id);
-        mesa.Rota = 'Mesa/Deletar';
-        res.render('partials/ModalDelete', {Model: mesa,  layout: false});
+        mesa.Rota = Routes.POST_MESA_DELETAR;
+        Render(req, res,Pages.PAGE_PARTIALS_MODAL_DELETAR, {Model: mesa,  layout: false});
     }
 
     async PostCadastrar(req, res){
-        const {Id} = req.body;
+        const {Id, Nome, Descricao} = req.body;
 
         var objRes = null;
         if(Id > 0)
@@ -37,11 +46,11 @@ class MesaController{
             objRes = await Mesa.create(req.body);
         }
         if(objRes)
-            req.session.Mensagem = new Mensagem(tipoMensagem.SUCCESS, 'Mesa atualizada com sucesso!');
+            req.session.Mensagem = new Mensagem(tipoMensagem.SUCCESS, `Mesa ${Id > 0 ? 'atualizada' : 'cadastrada'} com sucesso!`);
         else
-            req.session.Mensagem = new Mensagem(tipoMensagem.SUCCESS, 'Erro ao salvar mesa!');
+            req.session.Mensagem = new Mensagem(tipoMensagem.ERRO, 'Erro ao salvar mesa!');
 
-        res.redirect(Routes.POST_MESA);
+        res.redirect(Routes.GET_MESAS);
     }
 
     async PostDeletar(req, res){
@@ -53,7 +62,7 @@ class MesaController{
         else
             req.session.Mensagem = new Mensagem( tipoMensagem.ERRO, 'Erro ao excluir mesa!');
 
-        res.redirect(Routes.GET_MESA);
+        res.redirect(Routes.GET_MESAS);
 
     }
 }
