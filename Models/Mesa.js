@@ -1,24 +1,25 @@
 
-const Sequelize = require('sequelize')
+const Sequelize = require('sequelize');
 const db = require('../database/db');
 
-
-module.exports = db.define('Categoria',{
+const Mesa = db.define('Mesa',{
     Id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         primaryKey: true,
         autoIncrement: true,
     },
-    Nome: {
+    Numero: {
+        type: Sequelize.INTEGER
+    },
+    Localizacao:{
         type: Sequelize.STRING
     },
-    Descricao:{
-        type: Sequelize.STRING,
+    Cadeiras: {
+        type: Sequelize.INTEGER
     }
-    },{
-        initialAutoIncrement: 1,
-    }
-)
+})
 
 db.sync();
+
+module.exports = Mesa;

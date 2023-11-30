@@ -16,6 +16,8 @@ const CategoriaController = require('./Controllers/CategoriaController');
 const ClienteController = require('./Controllers/ClienteController');
 const Routes = require('./Config/Routes');
 const Pages = require('./Config/Pages');
+const FuncionarioController = require('./Controllers/FuncionarioController');
+const MesaController = require('./Controllers/MesaController');
 
 const app = express(); 
 
@@ -75,6 +77,23 @@ app.post('/Cliente/GetEditModal', ClienteController.PostGetEditModal);
 app.post('/Cliente/GetDeleteModal', ClienteController.PostGetDeleteModal);
 app.post('/Cliente/Cadastrar', ClienteController.PostCadastrar);
 app.post('/Cliente/Deletar', ClienteController.PostDeletar);
+
+//rotas get de funcioanrios
+app.get(Routes.GET_FUNCIONARIOS, FuncionarioController.Index );
+//funcionarios
+app.post('/Funcionario/GetEditModal', FuncionarioController.PostGetEditModal);
+app.post('/Funcionario/GetDeleteModal', FuncionarioController.PostGetDeleteModal);
+app.post('/Funcionario/Cadastrar', FuncionarioController.PostCadastrar);
+app.post('/Funcionario/Deletar', FuncionarioController.PostDeletar);
+
+//mesas get 
+app.get(Routes.GET_MESAS, MesaController.Index );
+//clientes
+app.post('/Mesa/GetEditModal', MesaController.PostGetEditModal);
+app.post('/Mesa/GetDeleteModal', MesaController.PostGetDeleteModal);
+app.post('/Mesa/Cadastrar', MesaController.PostCadastrar);
+app.post('/Mesa/Deletar', MesaController.PostDeletar);
+
 
 
 app.get('/test/GetEditModal', (req, res)=>{

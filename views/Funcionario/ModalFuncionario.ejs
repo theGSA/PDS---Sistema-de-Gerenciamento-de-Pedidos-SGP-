@@ -1,34 +1,34 @@
 <div class="modal fade rounded-5" id="Modal" tabindex="-1" aria-labelledby="EditModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form method="post" action="/Cliente/Cadastrar">
+            <form method="post" action="/Funcionario/Cadastrar">
             <div class="modal-header  bg-dark">
-                <h5 class="modal-title text-light" id="EditModalLabel"><%= Cliente?.Id ? 'Editar cliente': 'Novo Cliente' %></h5>
+                <h5 class="modal-title text-light" id="EditModalLabel"><%= Funcionario?.Id ? 'Editar funcionário': 'Novo Funcionario' %></h5>
                 <button type="button" class="btn-close bg-white p-1 rounded-circle" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                     <div class=" d-flex justify-content-between">
                         <div class="container-modal-id">
                             <label for="Id">ID:</label>
-                            <input type="text" class="input-label" value="<%= Cliente?.Id.toString().padStart(4,'0') %>" id="Id" name="Id" readonly>
+                            <input type="text" class="input-label" value="<%= Funcionario?.Id.toString().padStart(4,'0') %>" id="Id" name="Id" readonly>
                         </div>
                     </div>
                     <div class="mb-3">
                         <label for="Nome" class="col-form-label">Nome:</label>
-                        <input type="text" class="form-control" id="Nome" name="Nome" value="<%= Cliente?.Nome %>">
+                        <input type="text" class="form-control" id="Nome" name="Nome" value="<%= Funcionario?.Nome %>">
                     </div>
                     <div class="mb-3">
                         <label for="Email" class="col-form-label">Email:</label>
-                        <input class="form-control" type="email" id="Email" name="Email" value="<%= Cliente?.Email %>">
+                        <input class="form-control" type="email" id="Email" name="Email" value="<%= Funcionario?.Email %>">
                     </div>
 
                     <div class="mb-3">
                         <label for="Telefone" class="col-form-label">Telefone:</label>
-                        <input type="tel" onkeyup="handlePhone(event)" maxlength="15" pattern="\(\d{2}\)\s*\d{5}-\d{4}" class="form-control" id="Telefone" name="Telefone" value="<%= Cliente?.Telefone %>">
+                        <input type="tel" onkeyup="handlePhone(event)" maxlength="15" pattern="\(\d{2}\)\s*\d{5}-\d{4}" class="form-control" id="Telefone" name="Telefone" value="<%= Funcionario?.Telefone %>">
                     </div>
                     <div class="mb-3">
                         <select class="form-select" name="Usertype" id="Usertype" value>
-                            <% const usertype = Cliente ? Cliente.Usertype: 1; 
+                            <% const usertype = Funcionario ? Funcionario.Usertype: 1; 
                                 Usertype.forEach(el => { %>
                                 <option value="<%= el.Id%>" <%= el.Id == usertype ? 'selected': '' %> ><%= el.Descricao %></option>
                             <% }); %>

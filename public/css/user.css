@@ -101,3 +101,7 @@
 .btn{
     height: fit-content;
 }
+
+.modal-header{
+    height: 45px !important;
+}

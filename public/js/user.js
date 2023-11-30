@@ -38,19 +38,14 @@ async function ShowModalByPost(ele, rota, itemID){
         galleryModal.show();
     }
 
-    const header  = document.querySelector('#header');
     const pageContent  = document.querySelector('#pageContent');
+    const header  = document.querySelector('#header');
     const content = document.querySelector("#content");
 
     if(!Object.is(pageContent, null) && !Object.is(header, null) && !Object.is(content, null)){
 
         new ResizeObserver(() =>{
-        console.log( header.clientWidth + ' ' + header.clientHeight);
-        console.log( pageContent.clientWidth + ' ' + pageContent.clientHeight);
-
         content.style.height = `${(pageContent.clientHeight - header.clientHeight)}px `;
-        
-        // content.style.overflowY = 'auto';
     }
     ).observe(header);
 }
@@ -71,7 +66,7 @@ function RefreshImage(element)
     }
 }
 
-//valida o número de telefone na tela de cadastro
+//Valida o número de telefone na tela de cadastro
 const handlePhone = (event) => {
     let input = event.target
     input.value = phoneMask(input.value)

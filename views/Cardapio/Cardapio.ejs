@@ -1,11 +1,18 @@
 
 <div id="pageContent" style="overflow: hidden; height: 100%;">
     <div id="header" class="container-barra-pesquisa mb-2">
-        <h3 class="text-orangered">Cardápio</h3>
+        <h3 class="text-orangered">Menu</h3>
         <div class="container-search-cart" style="height: min-content;">
-            <input class="form-control input-buscar" placeholder="buscar item" style="height: min-content;">
+            <!-- <input class="form-control input-buscar" placeholder="buscar item" style="height: min-content;"> -->
             <!-- <div class="" style="width: 3vw; height: 3vw;"> -->
-                <i style="width: 35px; height:35; font-size: 80%;" class="container-carrinho bi bi-cart align-self-center text-white"></i>
+                    <a href="/Auth/LogOut" class="bi bi-box-arrow-left align-self-center container-carrinho text-white bg-danger p-0" style="text-decoration: none; cursor: pointer; width: 35px; height:35px; font-size: 80%;"></a>
+                
+                    <!-- <i class="bi-pencil" style="position: absolute; top: 4px;" ></i> -->
+                    <i style="width: 35px; height:35px; font-size: 80%;" class="container-carrinho bi bi-cart align-self-center text-white">
+                        <a style="text-shadow: 1px 1px 1px gray; color: black; border-radius: 50%; position: absolute; transform: translateY(-15px);" >0</a>
+                    </i>
+
+                
             <!-- </div> -->
         </div>
     </div>

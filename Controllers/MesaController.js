@@ -37,7 +37,7 @@ class MesaController{
             objRes = await Mesa.create(req.body);
         }
         if(objRes)
-            req.session.Mensagem = new Mensagem(tipoMensagem.SUCCESS, 'Mesa atualizado com sucesso!');
+            req.session.Mensagem = new Mensagem(tipoMensagem.SUCCESS, 'Mesa atualizada com sucesso!');
         else
             req.session.Mensagem = new Mensagem(tipoMensagem.SUCCESS, 'Erro ao salvar mesa!');
 
@@ -49,7 +49,7 @@ class MesaController{
 
         const objRes = await Mesa.destroy({where:{Id:Id}});
         if(objRes > 0)
-            req.session.Mensagem = new Mensagem( tipoMensagem.SUCCESS, 'Mesa excluído!');
+            req.session.Mensagem = new Mensagem( tipoMensagem.SUCCESS, 'Mesa excluída!');
         else
             req.session.Mensagem = new Mensagem( tipoMensagem.ERRO, 'Erro ao excluir mesa!');
 

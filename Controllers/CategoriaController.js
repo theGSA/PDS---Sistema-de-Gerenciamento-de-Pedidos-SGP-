@@ -39,8 +39,9 @@ class CategoriaController{
             req.body.Id = null;
             objRes = await Categoria.create(req.body);
         }
+
         if(objRes)
-            req.session.Mensagem = new Mensagem(tipoMensagem.SUCCESS, 'Categoria atualizado com sucesso!');
+            req.session.Mensagem = new Mensagem(tipoMensagem.SUCCESS, `Categoria ${ Id > 0 ? 'atualizada': 'cadastrada'} com sucesso!`);
         else
             req.session.Mensagem = new Mensagem(tipoMensagem.SUCCESS, 'Erro ao salvar categoria!');
 
