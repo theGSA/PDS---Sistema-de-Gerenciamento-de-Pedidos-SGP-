@@ -1,9 +1,6 @@
 
-    <h2>Bem vindo a página!</h2>
-    <b>Id: <%= Usuario?.Id %></b>
-    <b>Nome: <%= Usuario?.Nome %></b>
-    <b>Email: <%= Usuario?.Email ?? 'Sem registro' %></b>
-    <b>Senha': <%= Usuario?.Senha ?? 'Sen Registro' %></b>
+    <h2>Bem vindo(a) <%= Usuario?.Nome %>!</h2>
     <form action="/Auth/Logout" method="post">
-        <button type="submit" class="btn btn-danger" >Logout</button>
+        <button type="submit" class="btn btn-danger" >Sair</button>
     </form>
+    <meta http-equiv="refresh" content="3; URL='/Cardapio'"/>

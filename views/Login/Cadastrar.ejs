@@ -1,15 +1,15 @@
 
     <form class="" method="post" action="auth/Cadastrar" style="width: 100%;">
         <div class="col-sm-4 col-11 col-md-6 col-lg-5" style="margin: 0 auto; display: flex; flex-direction: column; gap: 10px;">
-            <h2>Cadastrar</h2>
-            <input class="form-control w-100" type="text" id="Nome" value="<%= Usuario?.Nome %>" name="Nome" placeholder="Nome" required>
-            <input class="form-control" type="email" id="Email" name="Email" value="<%= Usuario?.Email %>" placeholder="e-mail" required>
-            <input class="form-control" type="tel" id="Telefone" maxlength="15" name="Telefone" value="<%= Usuario?.Telefone %>" pattern="\(\d{2}\)\s*\d{5}-\d{4}" placeholder="telefone" onkeyup="handlePhone(event)" required>
-            <input class="form-control" type="password" placeholder="senha" value="<%= Usuario?.Password %>" required>
-            <input class="form-control" type="password" id="Password" name="Password" placeholder="confirma senha" value="<%= Usuario?.Password %>" required>
+            <h2>Dados cadastrais</h2>
+            <input class="form-control w-100" type="text" id="Nome" value="<%= Usuario?.Nome %>" name="Nome" placeholder="Nome completo" required>
+            <input class="form-control" type="email" id="Email" name="Email" value="<%= Usuario?.Email %>" placeholder="E -mail" required>
+            <input class="form-control" type="tel" id="Telefone" maxlength="15" name="Telefone" value="<%= Usuario?.Telefone %>" pattern="\(\d{2}\)\s*\d{5}-\d{4}" placeholder="Telefone com DDD" onkeyup="handlePhone(event)" required>
+            <input class="form-control" type="password" placeholder="Senha de acesso" value="<%= Usuario?.Password %>" required>
+            <input class="form-control" type="password" id="Password" name="Password" placeholder="Digite a senha novamente" value="<%= Usuario?.Password %>" required>
 
-            <button class="btn btn-primary" type="submit" >Cadastrar-se</button>
-            <a href="/Login" class="btn btn-danger">voltar</a>
+            <button class="btn btn-primary" type="submit" >Continuar</button>
+            <a href="/Login" class="btn btn-danger">Voltar</a>
             
         </div>
     </form>
