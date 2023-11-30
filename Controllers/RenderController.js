@@ -12,7 +12,7 @@ class RenderController
 
         res.render(pageName, objPages ,(err,html)=>{
             console.log(err);
-            res.send( err ? '<h2>erro na pagina!</h2>' : html);
+            res.send( err ? '<h2>Erro na página!</h2>' : html);
         });
     }
 }

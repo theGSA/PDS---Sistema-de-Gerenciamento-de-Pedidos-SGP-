@@ -71,7 +71,7 @@ function RefreshImage(element)
     }
 }
 
-//valida o número de telefone na tela de cadastro
+//Valida o número de telefone na tela de cadastro
 const handlePhone = (event) => {
     let input = event.target
     input.value = phoneMask(input.value)
