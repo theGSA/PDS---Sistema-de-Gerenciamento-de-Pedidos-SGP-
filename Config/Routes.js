@@ -11,7 +11,7 @@ module.exports = {
     GET_CLIENTES: '/Clientes',
     GET_CARDAPIO: '/Cardapio',
     GET_FUNCIONARIOS: '/Funcionarios',
-    GET_FUNCIONARIOS: '/Mesas',
+    GET_MESAS: '/Mesas',
 
     //post
     POST_AUTH: '/Auth',
@@ -37,7 +37,7 @@ module.exports = {
      POST_FUNCIONARIO_DELETAR: '/Funcionario/Deletar',
 
      //Mesas
-     POST_CLIENTE: '/Mesas',
-     POST_CLIENTE_CADASTRAR: '/Mesa/Cadastrar',
-     POST_CLIENTE_DELETAR: '/Mesa/Deletar',
+     POST_MESA: '/Mesas',
+     POST_MESA_CADASTRAR: '/Mesa/Cadastrar',
+     POST_MESA_DELETAR: '/Mesa/Deletar',
 }
