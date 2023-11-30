@@ -10,6 +10,8 @@ module.exports = {
     GET_PRODUTOS: '/Produtos',
     GET_CLIENTES: '/Clientes',
     GET_CARDAPIO: '/Cardapio',
+    GET_FUNCIONARIOS: '/Funcionarios',
+    GET_FUNCIONARIOS: '/Mesas',
 
     //post
     POST_AUTH: '/Auth',
@@ -28,5 +30,14 @@ module.exports = {
     //cliente
     POST_CLIENTE: '/Clientes',
     POST_CLIENTE_CADASTRAR: '/Cliente/Cadastrar',
-    POST_CLIENTE_DELETAR: '/Cliente/Deletar'
+    POST_CLIENTE_DELETAR: '/Cliente/Deletar',
+     //Funcionario
+     POST_FUNCIONARIO: '/Funcionarios',
+     POST_FUNCIONARIO_CADASTRAR: '/Funcionario/Cadastrar',
+     POST_FUNCIONARIO_DELETAR: '/Funcionario/Deletar',
+
+     //Mesas
+     POST_CLIENTE: '/Mesas',
+     POST_CLIENTE_CADASTRAR: '/Mesa/Cadastrar',
+     POST_CLIENTE_DELETAR: '/Mesa/Deletar',
 }

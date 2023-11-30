@@ -64,7 +64,7 @@ class ProdutoController{
             objRes = await Produto.create(req.body);
         }
         if(objRes)
-            req.session.Mensagem = new Mensagem(tipoMensagem.SUCCESS, 'Produto atualizado com sucesso!');
+            req.session.Mensagem = new Mensagem(tipoMensagem.SUCCESS, `Produto ${ Id > 0 ? 'atualizado': 'cadastrado'} com sucesso!`);
         else
             req.session.Mensagem = new Mensagem(tipoMensagem.SUCCESS, 'Erro ao salvar produto!');
 

@@ -6,27 +6,26 @@ const { Usuario, Usertype} = require('../Models/Usuario');
 const { Mensagem, tipoMensagem } = require('../Models/Mensagem');
 const Sequelize = require('sequelize');
 const { Render } = require('./RenderController');
-class ClienteController{
+class FuncionarioController{
     async Index(req, res){
           
-        const listaClientes = await Usuario.findAll(
+        const listaFuncionarios = await Usuario.findAll(
         {
             where: {
                 [Sequelize.Op.or]: [
-                { Usertype: Usertype.CLIENTE },
-                { Usertype: Usertype.NAO_CADASTRADO }
+                { Usertype: Usertype.FUNCIONARIO }
                 ]
             }
             }
         );
     
-        Render(req, res,Pages.PAGE_CLIENTE, {Clientes : listaClientes});
+        Render(req, res,Pages.PAGE_FUNCIONARIO, {Funcionarios : listaFuncionarios});
     }
 
 
     async PostGetEditModal(req, res){
         const {Id} = req.body;
-        const cliente = await Usuario.findByPk(Id);
+        const funcionario = await Usuario.findByPk(Id);
         
         const Usertype = [
             {Id:1, Descricao: 'Não cadastrado'},
@@ -34,14 +33,14 @@ class ClienteController{
             {Id:3, Descricao: 'Funcionário'},
         ]
 
-        Render(req, res,Pages.PAGE_MODAL_CLIENTE, {Cliente: cliente, Usertype:Usertype, layout: false});
+        Render(req, res,Pages.PAGE_MODAL_FUNCIONARIO, {Funcionario: funcionario, Usertype:Usertype, layout: false});
     }
 
     async PostGetDeleteModal(req, res){
         const {Id} = req.body;
-        const cliente = await Usuario.findByPk(Id);
-        cliente.Rota = Routes.POST_CLIENTE_DELETAR;
-        Render(req, res,Pages.PAGE_PARTIALS_MODAL_DELETAR, {Model: cliente,  layout: false});
+        const funcionario = await Usuario.findByPk(Id);
+        funcionario.Rota = Routes.POST_CLIENTE_DELETAR;
+        Render(req, res,Pages.PAGE_PARTIALS_MODAL_DELETAR, {Model: funcionario,  layout: false});
     }
 
     async PostCadastrar(req, res){
@@ -55,11 +54,11 @@ class ClienteController{
             objRes = await Usuario.create(req.body);
         }
         if(objRes)
-            req.session.Mensagem = new Mensagem(tipoMensagem.SUCCESS, 'Cliente atualizado com sucesso!');
+            req.session.Mensagem = new Mensagem(tipoMensagem.SUCCESS, 'Funcionario atualizado com sucesso!');
         else
-            req.session.Mensagem = new Mensagem(tipoMensagem.SUCCESS, 'Erro ao salvar cliente!');
+            req.session.Mensagem = new Mensagem(tipoMensagem.SUCCESS, 'Erro ao salvar funcionario!');
 
-        res.redirect(Routes.GET_CLIENTES);
+        res.redirect(Routes.GET_FUNCIONARIOS);
     }
 
     async PostDeletar(req, res){
@@ -67,13 +66,13 @@ class ClienteController{
 
         const objRes = await Usuario.destroy({where:{Id:Id}});
         if(objRes > 0)
-            req.session.Mensagem = new Mensagem( tipoMensagem.SUCCESS, 'Cliente excluído!');
+            req.session.Mensagem = new Mensagem( tipoMensagem.SUCCESS, 'Funcionário excluído!');
         else
-            req.session.Mensagem = new Mensagem( tipoMensagem.ERRO, 'Erro ao excluir cliente!');
+            req.session.Mensagem = new Mensagem( tipoMensagem.ERRO, 'Erro ao excluir funcionário!');
 
-        res.redirect(Routes.GET_CLIENTES);
+        res.redirect(Routes.GET_FUNCIONARIOS);
 
     }
 }
 
-module.exports  = new ClienteController();
+module.exports  = new FuncionarioController();

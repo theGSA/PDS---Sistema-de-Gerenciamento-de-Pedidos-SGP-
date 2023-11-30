@@ -1,6 +1,5 @@
 
 const Sequelize = require('sequelize');
-const Session = require('../Config/Session');
 const db = require('../database/db');
 
 

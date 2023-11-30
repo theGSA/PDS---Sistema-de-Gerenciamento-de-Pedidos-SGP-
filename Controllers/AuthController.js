@@ -29,7 +29,7 @@ class AuthController{
         else{
             req.session.user = _user.dataValues;
             req.session.touch();
-            res.redirect(Routes.GET_HOME);     
+            res.redirect(Routes.GET_CARDAPIO);     
         }
     }
 
@@ -98,8 +98,9 @@ class AuthController{
 
              Usuario.create(obj)
              .then(sucess => {
+                req.session.user = sucess;
                 req.session.Mensagem = new Mensagem(tipoMensagem.SUCCESS, 'Usuário cadastrado com sucesso!');
-                res.redirect(Routes.GET_LOGIN);
+                res.redirect(Routes.GET_CARDAPIO);
              })
              .catch(err=>{
                 req.session.Mensagem = new Mensagem(tipoMensagem.ERRO, 'Erro ao finalizar cadastro. Entre em contato com o administrador do sistema.');
