@@ -1,0 +1,17 @@
+<div class="modal fade" id="Modal" tabindex="-1" aria-labelledby="DeleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-danger">
+                <h5 class="modal-title text-light" Id="DeleteModalLabel">Aviso</h5>
+                <button type="button" class="btn-close bg-light" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h6><%= Questao.Mensagem %></h6>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Não</button>
+                <a href="<%= Questao.AcaoSim %>" class="btn btn-primary">Sim</a>
+            </div>
+        </div>
+    </div>
+</div>
