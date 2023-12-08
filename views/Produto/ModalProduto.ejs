@@ -1,0 +1,54 @@
+<div class="modal fade rounded-5" id="Modal" tabindex="-1" aria-labelledby="EditModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form method="post" action="/Produto/Cadastrar" enctype="multipart/form-data">
+            <div class="modal-header  bg-orangered">
+                <h5 class="modal-title text-light" id="EditModalLabel"><%= Produto?.Id ? 'Editar produto': 'Nova Produto' %></h5>
+                <button type="button" class="btn-close bg-white p-1 rounded-circle" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                    <div class=" d-flex justify-content-between">
+                        <div class="container-modal-id" >
+                            <label for="Id">ID:</label>
+                            <input type="text" class="input-label" id="Id" name="Id" value="<%= Produto?.Id.toString().padStart(4, '0') ?? 'Novo'%>" readonly />
+                        </div>
+                        <img id="imgProduto" src="<%= Produto?.Imagem64 %>" style=" background-color: gray; border-radius: 10px;" width="100" height="100" alt="">
+                        <input type="hidden" id="NomeImagem" name="NomeImagem" value="<%= Produto?.NomeImagem %>" >
+                    </div>
+                    <div class="mb-3">
+                        <label for="Nome" class="col-form-label">Nome:</label>
+                        <input type="text" class="form-control" id="Nome" name="Nome" value="<%= Produto?.Nome %>">
+                    </div>
+                    <div class="mb-3">
+                        <label for="Descricao" class="col-form-label">Descrição:</label>
+                        <textarea class="form-control" id="Descricao" name="Descricao"><%= Produto?.Descricao %></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="Preco" class="col-form-label">Preço:</label>
+                        <input type="number" class="form-control" step='0.01' placeholder='0.00' id="Preco" name="Preco" value="<%= Produto?.Preco ? Produto?.Preco.toFixed(2) : '0,00' %>">
+                    </div>
+                    <div class="mb-3">
+                        <label for="Quantidade" class="col-form-label">Quantidade:</label>
+                        <input type="number" class="form-control" step='0.01' placeholder='0.00' id="Quantidade" name="Quantidade" value="<%= Produto?.Quantidade ?? 0 %>">
+                    </div>
+                    <div class="mb-3">
+                        <select class="form-select" name="IdCategoria" id="IdCategoria" aria-label="categorias de alimentos">
+                            <% Categorias.forEach((el, i)=>{ %>
+                                <option <%= (i == 0 && Produto?.Id <= 0) || (el.Id == Produto?.IdCategoria) ? 'selected' :'' %>
+                                    value= <%= el.Id  %> ><%= el?.Nome %>
+                                </option>
+                            <% }) %>
+                        </select>
+                        <!-- <button type="button" onclick="ShowModalByPost(this,'Categoria/GetEditModal')" >Categoria</button> -->
+                    </div>
+                    <input onchange='RefreshImage(this)' data-showIn="#imgProduto" type="file" id="Imagem" name="Imagem" accept="image/jpeg, image/png, image/jpg">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                <button type="submit" onclick="this.form.submit(); this.disabled=true; this.value='Sending…'; " class="btn btn-primary">Salvar</button>
+            </div>
+        </form>
+        </div>
+    </div>
+</div>

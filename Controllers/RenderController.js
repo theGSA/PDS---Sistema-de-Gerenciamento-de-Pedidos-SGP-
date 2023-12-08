@@ -1,26 +1,25 @@
 const Pages = require("../Config/Pages");
-const Routes = require("../Config/Routes");
+const Routes = require("../Config/Rotas");
 const { Usertype } = require("../Models/Usuario");
 
 
 class RenderController
 {
-    HasAccess(Page, ){
-
-    }
-
     async Render(req, res, pageName, objPages){
         let Mensagem = req.session.Mensagem;
         req.session.Mensagem = null;
 
+        if(!objPages)
+            objPages = {};
+        
         objPages.Usuario = req.session.user;
         objPages.Mensagem = Mensagem;
         objPages.Page = req.path.split('/')[1].toLowerCase();
 
-        const canAcess = ['login', 'cardapio', 'cadastrar'];
+        const canAccess = ['login', 'cardapio', 'cadastrar'];
 
         //se o usuario difente de funcionario redireciona para cardapio
-        if(!canAcess.includes(objPages.Page.toLowerCase()) && (!objPages.Usuario || objPages.Usuario.Usertype != Usertype.FUNCIONARIO ))
+        if(!canAccess.includes(objPages.Page.toLowerCase()) && (!objPages.Usuario || objPages.Usuario.Usertype != Usertype.FUNCIONARIO ))
         {
             res.redirect(Routes.GET_CARDAPIO);
             return;   

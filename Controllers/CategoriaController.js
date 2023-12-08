@@ -1,7 +1,6 @@
 
-const session = require('express-session');
 const Pages = require('../Config/Pages');
-const Routes = require('../Config/Routes');
+const Routes = require('../Config/Rotas');
 const Categoria = require('../Models/Categoria');
 const { Mensagem, tipoMensagem } = require('../Models/Mensagem');
 const { Render } = require('./RenderController');
@@ -19,7 +18,7 @@ class CategoriaController{
         const {Id} = req.body;
         const categoria = await Categoria.findByPk(Id);
     
-        Render(req, res,Pages.PAGE_PARTIALS_MODAL_CATEGORIA, {Categoria: categoria, layout: false});
+        Render(req, res,Pages.PAGE_MODAL_CATEGORIA, {Categoria: categoria, layout: false});
     }
 
     async PostGetDeleteModal(req, res){
@@ -45,7 +44,7 @@ class CategoriaController{
         else
             req.session.Mensagem = new Mensagem(tipoMensagem.SUCCESS, 'Erro ao salvar categoria!');
 
-        await res.redirect(Routes.POST_CATEGORIA);
+        res.redirect(Routes.GET_CATEGORIA);
     }
 
     async PostDeletar(req, res){
@@ -57,7 +56,7 @@ class CategoriaController{
         else
             req.session.Mensagem = new Mensagem( tipoMensagem.ERRO, 'Erro ao excluir categoria!');
 
-        res.redirect(Routes.GET_CATEGORIAS);
+        res.redirect(Routes.GET_CATEGORIA);
 
     }
 }

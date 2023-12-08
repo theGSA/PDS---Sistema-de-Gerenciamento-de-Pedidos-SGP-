@@ -1,0 +1,19 @@
+<div class="modal fade rounded-5" id="Modal" tabindex="-1" aria-labelledby="EditModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form method="post" action="/Pedido/Cadastrar">
+            <div class="modal-header  bg-dark">
+                <h5 class="modal-title text-light" id="EditModalLabel"><%= Pedido?.Id ? 'Editar pedido': 'Novo Pedido' %></h5>
+                <button type="button" class="btn-close bg-white p-1 rounded-circle" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h2>Modal pedido</h2>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                <button type="submit" onclick="this.form.submit(); this.disabled=true; this.value='Sending…'; " class="btn btn-primary">Salvar</button>
+            </div>
+        </form>
+        </div>
+    </div>
+</div>

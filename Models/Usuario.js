@@ -1,6 +1,7 @@
 
 const Sequelize = require('sequelize')
 const db = require('../database/db');
+const { Pedido } = require('./Pedido');
 
 const Usertype = {
     NAO_CADASTRADO: 1,
@@ -32,5 +33,14 @@ const Usuario = db.define('Usuario',{
         allowNull: false,
     }
 })
+
+Usuario.hasMany(Pedido,{
+    foreignKey: 'IdUsuario',
+    sourceKey: 'Id'
+})
+
+
+
+
 db.sync();
 module.exports = {Usuario, Usertype};

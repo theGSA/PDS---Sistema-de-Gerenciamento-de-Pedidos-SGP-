@@ -3,7 +3,9 @@
         <h3 class="text-orangered">Produtos</h3>
         <div class="container-search-cart">
             <!-- <input class="form-control input-buscar" placeholder="buscar produto"> -->
-            <button class="btn btn-primary" onclick="ShowModalByPost(this,'Produto/GetEditModal')">Cadastrar novo produto</button>
+            <button class="btn btn-primary" onclick="ShowModalByPost(this,'Produto/GetEditModal')">
+                Cadastrar novo produto
+            </button>
         </div>
     </div>  
 <% if(Produtos && Produtos.length> 0) {%>
@@ -24,11 +26,13 @@
                     </td>
                     <td  id="item_name_<%=element.Id %>">
                         <%= element.Nome %>
-                    </br>
-                    <i style="font-style: normal; font-size: xx-small; color: gray;"><%= element.Categorium?.Nome %></i>               
+                        </br>
+                        <i style="font-style: normal; font-size: xx-small; color: gray;"><%= element.Categorium?.Nome %></i> 
+                        </br>
+                        <i style="font-style: normal; font-size: xx-small; color: gray;"><%= 'qtd: ' + (element?.Quantidade ?? 0)  %></i>                
                     </td>
-                    <td>
-                        R$ <%= element.Preco ? element.Preco.toFixed(2) : 0.00 %>
+                    <td class="text-nowrap">
+                        R$ <%= element?.Preco ? element.Preco.toFixed(2).replace('.',',') : 0,00 %>
                     </td>
                     <td  class="d-none d-md-table-cell" >
                         <%= element.Descricao %>

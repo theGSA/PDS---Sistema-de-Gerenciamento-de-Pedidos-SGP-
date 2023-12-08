@@ -1,23 +1,22 @@
 
 
 const Pages = require('../Config/Pages');
-const Routes = require('../Config/Routes');
+const Routes = require('../Config/Rotas');
 const { Usuario, Usertype} = require('../Models/Usuario');
 const { Mensagem, tipoMensagem } = require('../Models/Mensagem');
 const Sequelize = require('sequelize');
 const { Render } = require('./RenderController');
+
 class FuncionarioController{
     async Index(req, res){
-          
         const listaFuncionarios = await Usuario.findAll(
         {
             where: {
                 [Sequelize.Op.or]: [
-                { Usertype: Usertype.FUNCIONARIO }
+                    { Usertype: Usertype.FUNCIONARIO }
                 ]
             }
-            }
-        );
+        });
     
         Render(req, res,Pages.PAGE_FUNCIONARIO, {Funcionarios : listaFuncionarios});
     }
@@ -58,7 +57,7 @@ class FuncionarioController{
         else
             req.session.Mensagem = new Mensagem(tipoMensagem.ERRO, 'Erro ao salvar funcionário!');
 
-        res.redirect(Routes.GET_FUNCIONARIOS);
+        res.redirect(Routes.GET_FUNCIONARIO);
     }
 
     async PostDeletar(req, res){
@@ -70,7 +69,7 @@ class FuncionarioController{
         else
             req.session.Mensagem = new Mensagem( tipoMensagem.ERRO, 'Erro ao excluir funcionário!');
 
-        res.redirect(Routes.GET_FUNCIONARIOS);
+        res.redirect(Routes.GET_FUNCIONARIO);
 
     }
 }

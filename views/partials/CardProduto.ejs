@@ -1,18 +1,18 @@
 <div class="container-card-item">
     <div class="" style="width: fit-content;">
-        <img style="min-width: 70px; height: max-content;" src="<%= element?.Imagem64 ? element?.Imagem64 : '/img/logo.png' %>" alt="" >
+        <img class="img-produto" src="<%= element?.Imagem64 ? element?.Imagem64 : '/img/imagem_produto_padrao.png' %>" alt="" >
     </div>
     <div class="container-item-conteudo">
         <div class="container-produtor-descricao">
             <div class="ft-title"><%= element?.Nome %></div>
             <i class="produto-descricao"><%= element?.Descricao %></i>
         </div>
-        <div class="container-preco">
-            <i><%= `R$ ${element?.Preco ? element.Preco.toFixed(2).replace('.',',') : 0.00 }` %></i>
+        <div class="container-preco-quantidade">
+            <i style="text-wrap:nowrap;"><%= `R$ ${element?.Preco ? element.Preco.toFixed(2).replace('.',',') : '0,00' }` %></i>
             <div class="container-quantidade">
-                <i class="bi-dash bg-danger btn-minus"></i>
-                <a class="text-dark text-decoration-none">0</a>
-                <i class="bi-plus bg-green btn-plus"></i>
+                <i onclick="ExecutePostCardapio('remover','<%= element.Id %>' )" class="btn bi-dash bg-danger btn-minus"></i>
+                <a name="<%= `produto_${element.Id}` %>" class="text-dark text-decoration-none text-produto-quantidade"><%= element?.QuantidadePedido ?? 0 %></a>
+                <i onclick="ExecutePostCardapio('adicionar','<%= element.Id %>' )" class="btn bi-plus bg-green btn-plus"></i>
             </div>
         </div>
     </div>

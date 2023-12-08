@@ -1,0 +1,32 @@
+<div class="modal fade rounded-5" id="Modal" tabindex="-1" aria-labelledby="EditModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form method="post" action="/Categoria/Cadastrar">
+            <div class="modal-header  bg-orangered" style="height: min-content;">
+                <h4 class="modal-title text-light" id="EditModalLabel"><%= Categoria?.Id ? 'Editar categoria': 'Nova Categoria' %></h4>
+                <button type="button" class="btn-close bg-white p-1 rounded-circle" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                    <div class=" d-flex justify-content-between">
+                        <div class="mb-3 col-3">
+                            <label for="Id" class="col-form-label">ID:</label>
+                            <input type="text" class="form-control" value="<%= Categoria?.Id %>" id="Id" name="Id" readonly>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="Nome" class="col-form-label">Nome:</label>
+                        <input type="text" class="form-control" id="Nome" name="Nome" value="<%= Categoria?.Nome %>">
+                    </div>
+                    <div class="mb-3">
+                        <label for="Descricao" class="col-form-label">Descrição:</label>
+                        <textarea class="form-control" id="Descricao" name="Descricao"><%= Categoria?.Descricao %></textarea>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                <button type="submit" onclick="this.form.submit(); this.disabled=true; this.value='Sending…'; " class="btn btn-primary">Salvar</button>
+            </div>
+        </form>
+        </div>
+    </div>
+</div>

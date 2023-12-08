@@ -1,8 +1,8 @@
 
 async function ShowModalByPost(ele, rota, itemID){
         if(ele) ele.disabled = true;
-
-        fetch(`/${rota}`,{
+        ShowLoading();
+        await fetch(`/${rota}`,{
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -19,7 +19,10 @@ async function ShowModalByPost(ele, rota, itemID){
         })
         .catch(e =>{
             console.log('erro: '+e);
-        })
+        }).finally(
+
+           ()=> CloseLoading()
+        )
     }
 
     function ShowModal(T)
@@ -88,3 +91,56 @@ const handlePhone = (event) => {
       x.type = "password";
     }
   }
+
+  function ShowLoading()
+  {
+    const strHtml = `<div id="loading">
+                        <img id="loading-image" src="./img/loading.gif" alt="Loading..." />
+                    </div>`
+
+    const doc = new DOMParser().parseFromString(strHtml, 'text/html');
+    const modal = doc.body.querySelector('*');
+
+    document.body.appendChild(modal);
+
+  }
+
+  function CloseLoading()
+  {
+    const loading = document.getElementById('loading');
+    if(loading)
+        document.body.removeChild(loading);
+  }
+
+
+async function ExecutePostCardapio(acao, id)
+{
+    ShowLoading();
+    fetch('/Cardapio', {
+        method: 'post',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body:JSON.stringify({    
+            acao: acao,
+            IdProduto: id,
+        })
+    })
+    .then(data => data.json())
+    .then(data => {
+        for(var pedidoProduto of data.PedidoProdutos )
+        {
+            //atualizar os valores dos produtos do cardapio
+            const elem = document.getElementsByName(`produto_${pedidoProduto.IdProduto}`);
+            elem.forEach(el => el.innerHTML = pedidoProduto.Quantidade )
+        }
+        const elementosQuantidadeTotal = document.getElementsByName("PedidoQuantidadeTotal");
+        elementosQuantidadeTotal.forEach(el=>{
+            el.innerHTML = data.QuantidadeItens;
+            el.style.visibility = data.QuantidadeItens == 0 ? 'hidden': 'visible';
+        })
+    })
+    .finally(() => CloseLoading());
+
+}

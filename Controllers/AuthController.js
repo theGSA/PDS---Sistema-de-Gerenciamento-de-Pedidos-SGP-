@@ -1,27 +1,15 @@
 const {Usuario, Usertype} = require('../Models/Usuario');
 const Utils = require('../Utils/Utils'); 
-const express = require('express');
-const LoginController = require('./LoginController');
-const HomeController = require('./HomeController');
 const { Mensagem, tipoMensagem } = require('../Models/Mensagem');
-const Security = require('../Utils/security');
-const Routes = require('../Config/Routes');
-const Pages = require('../Config/Pages');
-const session = require('express-session');
-const { render } = require('ejs');
-const { Render } = require('./RenderController');
+const Security = require('../Utils/Security');
+const Routes = require('../Config/Rotas');
 
-
-const app = express();
 
 class AuthController{
     async Index (req, res){
         const {Email, Password} = req.body;
-        console.log(Email);
-        console.log(Password);
         
         const securePassword = await Security.CreateSecurity(Email, Password);
-
         const _user = await Usuario.findOne( {where:{Email: Email ?? '', Password: securePassword}});
 
         if(_user == null){
@@ -39,11 +27,10 @@ class AuthController{
     async SemCadastro(req, res){
         const a = req.body;
 
-        console.log(a.nome);
-        if(a.Nome == '' || a.Nome.length < 4)
+        if(a.Nome == '' || a.Nome.length < 2)
         {
             req.session.Mensagem = new Mensagem(tipoMensagem.ERRO, 'Informe um nome válido!');
-            res.redirect('/Login');
+            res.redirect(Routes.GET_LOGIN);
         }
         else{
             let obj = {
@@ -61,7 +48,7 @@ class AuthController{
     async Logout(req, res){
         req.session.user = null;
         req.session.Mensagem =  new Mensagem(tipoMensagem.SUCCESS,  'Volte sempre!');
-        res.redirect('/Login');
+        res.redirect(Routes.GET_LOGIN);
     }
     
     static async ValidarCadastro(obj, req){
