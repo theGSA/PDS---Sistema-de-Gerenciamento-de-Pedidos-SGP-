@@ -11,6 +11,12 @@ const StatusPedido = {
     FINALIZADO: 4, //quando ja foi pago
 }
 
+const ModoPagamento = {
+    PIX: 0,
+    CARTAO: 1,
+    DINHEIRO: 2,
+}
+
 const Pedido = db.define('Pedido',{
     Id: {
         type: Sequelize.INTEGER,
@@ -30,8 +36,13 @@ const Pedido = db.define('Pedido',{
     ValorTotal:{
         type: Sequelize.FLOAT
     },
+    ModoPagamento:{
+        type: Sequelize.INTEGER,
+        defaultValue: ModoPagamento.PIX,
+    },
     Status:{
         type: Sequelize.INTEGER,
+        defaultValue: StatusPedido.INCOMPLETO,
         allowNull: false,
     }  
 })

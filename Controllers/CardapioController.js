@@ -25,12 +25,7 @@ class CardapioController{
                 if(objCategoria.Produtos != null && objCategoria.Produtos.length > 0){
                     for(var produto of objCategoria.Produtos)
                     {
-                        // if(produto.Imagem)
-                        // {
-                        //     produto.Imagem64 = `data:${produto.TipoImagem};base64, ${BlobToBase64Content(produto.Imagem)}`;
-                        // }
-                        const p = pedido.PedidoProdutos?.find(o => o.IdProduto == produto.Id)
-                        
+                        const p = pedido.PedidoProdutos?.find(o => o.IdProduto == produto.Id)                     
                         if(p){
                             produto.QuantidadePedido = p.Quantidade;
                         }
@@ -47,7 +42,8 @@ class CardapioController{
     //e atualiza a pagina de cardapio
     async Cardapio(req, res)
     {
-        const {acao, IdProduto} = req.body;
+        //tipoRetorno: 'ModalUpdate',
+        const {acao, tipoRetorno, IdProduto} = req.body;
 
         if(acao == 'remover'){
             await PedidoController.RemoverProduto(req, res, IdProduto);
@@ -55,16 +51,16 @@ class CardapioController{
         else if(acao == 'adicionar'){
            await PedidoController.AdicionarProduto(req, res, IdProduto);
         }
-
         
         let pedido = req.session.Pedido;
-        res.send(pedido);
+        if(tipoRetorno == 'ModalUpdate'){
+            //RenderController.Render(req, res, Pages.PAGE_MODAL_PEDIDO_CLIENTE,{Pedido: pedido, layout:false}) 
+            await PedidoController.ObterModalPedidosCliente(req, res);
+        }
+        else{
 
-        // PedidoProduto.findAll({where:{IdPedido: pedido.Id }})
-        // .then(_pedido => res.send(_pedido))
-        // .catch(err=>{
-        //     res.status(405);
-        // })
+            res.send(pedido); 
+        }
     }
 
     async ObterModalQuestaoLogout(req, res)

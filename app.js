@@ -14,7 +14,7 @@ const ProdutoController = require('./Controllers/ProdutoController');
 const CardapioController = require('./Controllers/CardapioController');
 const CategoriaController = require('./Controllers/CategoriaController');
 const ClienteController = require('./Controllers/ClienteController');
-const Routes = require('./Config/Rotas');
+const Rotas = require('./Config/Rotas');
 const Pages = require('./Config/Pages');
 const FuncionarioController = require('./Controllers/FuncionarioController');
 const MesaController = require('./Controllers/MesaController');
@@ -38,37 +38,39 @@ app.use(function(req, res, next){
 app.set('view engine', 'ejs');
 app.use(expressLayout);
 global.Usertype = Usertype;
+global.ToReal = (number) => number.toFixed(2).replace('.', ',');
 
-app.get(Routes.GET_LOGIN, LoginController.Index);
-app.get(Routes.GET_LOGIN_RECUPERAR_SENHA, LoginController.RecuperarSenha);
-app.get(Routes.GET_LOGIN_CADASTRAR, LoginController.Cadastrar)
+app.get(Rotas.GET_LOGIN, LoginController.Index);
+app.get(Rotas.GET_LOGIN_RECUPERAR_SENHA, LoginController.RecuperarSenha);
+app.get(Rotas.GET_LOGIN_CADASTRAR, LoginController.Cadastrar)
 
 //Cardápio
 app.get('/', CardapioController.Index);
-app.get(Routes.GET_CARDAPIO, CardapioController.Index);
-app.post(Routes.GET_CARDAPIO, CardapioController.Cardapio);
+app.get(Rotas.GET_CARDAPIO, CardapioController.Index);
+app.post(Rotas.GET_CARDAPIO, CardapioController.Cardapio);
 
-app.post(Routes.POST_AUTH, AuthController.Index);
-app.post(Routes.POST_AUTH_SEM_CADASTRO, AuthController.SemCadastro)
-app.get(Routes.POST_AUTH_LOGOUT, AuthController.Logout)
-app.post(Routes.POST_AUTH_CADASTRAR, AuthController.Cadastrar)
-app.post(Routes.POST_AUTH_RECUPERAR_SENHA, AuthController.RecuperarSenha)
+app.post(Rotas.POST_AUTH, AuthController.Index);
+app.post(Rotas.POST_AUTH_SEM_CADASTRO, AuthController.SemCadastro)
+app.get(Rotas.POST_AUTH_LOGOUT, AuthController.Logout)
+app.post(Rotas.POST_AUTH_CADASTRAR, AuthController.Cadastrar)
+app.post(Rotas.POST_AUTH_RECUPERAR_SENHA, AuthController.RecuperarSenha)
+app.post(Rotas.POST_PEDIDO_ATUALIZAR_MODO_PAGAMENTO, PedidoController.AtualizaModoPagamento)
+app.post(Rotas.POST_PEDIDO_CONFIRMAR_PEDIDO, PedidoController.ConfirmarPedido);
 
-
-app.get(Routes.GET_HOME, HomeController.Index);
+app.get(Rotas.GET_HOME, HomeController.Index);
 
 //Registra as rotas das paginas
-PageRouteRegister.Register(app, Routes.GET_CLIENTE, ClienteController );
-PageRouteRegister.Register(app, Routes.GET_FUNCIONARIO,  FuncionarioController);
-PageRouteRegister.Register(app, Routes.GET_MESA, MesaController);
-PageRouteRegister.Register(app, Routes.GET_PRODUTO, ProdutoController);
-PageRouteRegister.Register(app, Routes.GET_CATEGORIA, CategoriaController);
-PageRouteRegister.Register(app, Routes.GET_PEDIDO, PedidoController);
+PageRouteRegister.Register(app, Rotas.GET_CLIENTE, ClienteController );
+PageRouteRegister.Register(app, Rotas.GET_FUNCIONARIO,  FuncionarioController);
+PageRouteRegister.Register(app, Rotas.GET_MESA, MesaController);
+PageRouteRegister.Register(app, Rotas.GET_PRODUTO, ProdutoController);
+PageRouteRegister.Register(app, Rotas.GET_CATEGORIA, CategoriaController);
+PageRouteRegister.Register(app, Rotas.GET_PEDIDO, PedidoController);
 
 
 //
-app.post(Routes.POST_CARDAPIO_LOGOUT, CardapioController.ObterModalQuestaoLogout);
-app.post(Routes.POST_PEDIDO_MODAL_PEDIDO_CLIENTE, PedidoController.ObterModalPedidosCliente );
+app.post(Rotas.POST_CARDAPIO_LOGOUT, CardapioController.ObterModalQuestaoLogout);
+app.post(Rotas.POST_PEDIDO_MODAL_PEDIDO_CLIENTE, PedidoController.ObterModalPedidosCliente );
 
 app.post('/', async (req, res)=>{
     const {Action} = req.body;

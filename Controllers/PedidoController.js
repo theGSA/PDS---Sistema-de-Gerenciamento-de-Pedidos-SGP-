@@ -230,6 +230,36 @@ class PedidoController{
             req.session.Pedido = await pedido.save();
         })
     }
+    async AtualizaModoPagamento(req, res)
+    {
+        const {Id} = req.body
+
+        const pedido = req.session.Pedido;
+
+        Pedido.findByPk(pedido.Id)
+        .then(_pedido =>{
+            _pedido.ModoPagamento = Id;
+            _pedido.save();
+            res.status(200).send({});
+        })
+        .catch((err)=>{
+            res.status(400).send(err);
+        })
+
+    }
+
+    async ConfirmarPedido(req, res)
+    {
+        const pedido = req.session.Pedido;
+
+        Pedido.findByPk(pedido.Id)
+        .then(_pedido =>{
+            _pedido.Status = StatusPedido.PENDENTE;
+            _pedido.save();
+            Render(req, res, Pages.PAGE_MODAL_PEDIDO_CONFIRMAR, {layout: false} );
+        })
+    }
+
 }
 
 module.exports  = new PedidoController();

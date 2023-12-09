@@ -13,7 +13,6 @@ const Pages = {
     PAGE_CATEGORIA: 'Categoria/Categoria',
     PAGE_MODAL_CATEGORIA: 'Categoria/ModalCategoria',
     
-    
     PAGE_CLIENTE: 'Cliente/Cliente',
     PAGE_MODAL_CLIENTE: 'Cliente/ModalCliente',
     
@@ -26,6 +25,7 @@ const Pages = {
     PAGE_PEDIDO: 'Pedido/Pedido',
     PAGE_MODAL_PEDIDO: 'Pedido/ModalPedido',
     PAGE_MODAL_PEDIDO_CLIENTE: 'Pedido/ModalPedidoCliente',
+    PAGE_MODAL_PEDIDO_CONFIRMAR: 'Pedido/ModalConfirmarPedido',
 
     PAGE_PARTIALS_MODAL_DELETAR: 'Partials/ModalDelete',
     PAGE_PARTIALS_MODAL_QUESTAO: 'Partials/ModalQuestao'

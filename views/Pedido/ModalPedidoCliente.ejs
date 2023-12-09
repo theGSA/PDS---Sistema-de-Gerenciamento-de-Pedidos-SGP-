@@ -6,7 +6,7 @@
                 <button type="button" class="btn-close bg-light" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body" style="height: 400px; overflow:hidden;">
-                <div class="d-flex flex-column gap-2" style="height: 70%; overflow-y: auto;">
+                <div id="modal-container-pedidos" class="d-flex flex-column gap-2" style="height: 70%; overflow-y: auto;">
 
                     <% for(var pedidoProduto of Pedido?.PedidoProdutos) { %>
                         <% if(pedidoProduto.Quantidade > 0){  %>
@@ -16,27 +16,24 @@
                 </div>
                 <div class="d-flex flex-row rounded-2 gap-4" style="margin: 1rem 0 .5rem; padding: .5rem; border: 1px solid grey;" id="">
                     <a style="padding: 0 5px; text-decoration: none; position: absolute; background-color: white; transform: translate(0, -20px);" >Forma de Pagamento</a>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="FormaPagamento" id="PagamentoPix" value="1" checked>
-                        <label class="form-check-label" for="PagamentoPix">Pix</label>  
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="FormaPagamento" id="PagamentoCartao" value="2">
-                        <label class="form-check-label" for="PagamentoCartao">Cartão</label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="FormaPagamento" id="PagamentoDinheiro" value="3">
-                        <label class="form-check-label" for="PagamentoDinheiro">Dinheiro</label>
-                    </div>
+                    <% const ModosPagamento = [{'id': 0, 'nome': 'Pix'}, {'id': 1, 'nome': 'Cartão'}, {'id': 2, 'nome': 'Dinheiro'}];
+                    
+                    for(var modPagamento of ModosPagamento ){%>    
+                        <div class="form-check">
+                            <input class="form-check-input" onchange="AtualizaModoPagamento('<%= modPagamento.id %>')" id="<%= `PagamentoPix${modPagamento.id}` %>" type="radio" name="ModoPagamento" value="<%= modPagamento.id %>" <%= modPagamento.id == Pedido?.ModoPagamento ? 'checked':'' %>>
+                            <label class="form-check-label" for="<%= `PagamentoPix${modPagamento.id}` %>"><%= modPagamento.nome %></label>  
+                        </div>
+                    <%}%>
+
                 </div>
                 <div style="display: flex; flex-flow: column; gap: 2px; padding: 5px;" >
-                    <span style="font-weight: 600;">Quantidade de itens: <a name="PedidoQuantidadeTotal" style="font-weight: 500;"><%= Pedido?.QuantidadeItens ?? 0 %></a></span>
-                    <span style="font-weight: 600;">Total: <a name="PedidoValorTotal" style="font-weight: 500;"><%= 'R$ ' + (Pedido?.ValorTotal ?? '0,00') %></a> </span>
+                    <span style="font-weight: 600;">Quantidade de itens: <a style="font-weight: 500;"><%= Pedido?.QuantidadeItens ?? 0 %></a></span>
+                    <span style="font-weight: 600;">Total: <a style="font-weight: 500;"><%= 'R$ ' + ToReal((Pedido?.ValorTotal ?? 0)) %></a> </span>
                 </div>
             </div>
             <div class="modal-footer" >
                 <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Voltar</button>
-                <a href="" class="btn btn-success">Confirmar</a>
+                <button onclick="ConfirmarPedido()" data-bs-dismiss="modal" class="btn btn-success">Confirmar</button>
             </div>
         </div>
     </div>

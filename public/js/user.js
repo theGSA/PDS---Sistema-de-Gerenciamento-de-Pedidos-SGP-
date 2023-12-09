@@ -1,8 +1,18 @@
 
-async function ShowModalByPost(ele, rota, itemID){
-        if(ele) ele.disabled = true;
+    async function ShowModalByPost(ele, rota, itemID){
         ShowLoading();
-        await fetch(`/${rota}`,{
+        GetModalString(rota, itemID)
+        .then((str)=>{
+            ShowModal(str);
+        })
+        .catch(err=> console.log(err))
+        .finally(()=>CloseLoading());
+
+    }
+
+    async function GetModalString(rota, itemID)
+    {
+        return await fetch(`/${rota}`,{
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -14,14 +24,11 @@ async function ShowModalByPost(ele, rota, itemID){
         })
         .then(T =>  T.text())
         .then(T =>{
-            ShowModal(T);
-            if(ele)  ele.disabled = false;
+            return T;
         })
         .catch(e =>{
             console.log('erro: '+e);
         }).finally(
-
-           ()=> CloseLoading()
         )
     }
 
@@ -95,13 +102,14 @@ const handlePhone = (event) => {
   function ShowLoading()
   {
     const strHtml = `<div id="loading">
-                        <img id="loading-image" src="./img/loading.gif" alt="Loading..." />
+                        <img id="loading-image" src="./img/loading.gif" alt="carregando ..." />
                     </div>`
 
     const doc = new DOMParser().parseFromString(strHtml, 'text/html');
     const modal = doc.body.querySelector('*');
 
-    document.body.appendChild(modal);
+    if(!document.getElementById("loading"))
+        document.body.appendChild(modal);
 
   }
 
@@ -116,7 +124,7 @@ const handlePhone = (event) => {
 async function ExecutePostCardapio(acao, id)
 {
     ShowLoading();
-    fetch('/Cardapio', {
+    await fetch('/Cardapio', {
         method: 'post',
         headers: {
             'Accept': 'application/json',
@@ -135,12 +143,58 @@ async function ExecutePostCardapio(acao, id)
             const elem = document.getElementsByName(`produto_${pedidoProduto.IdProduto}`);
             elem.forEach(el => el.innerHTML = pedidoProduto.Quantidade )
         }
-        const elementosQuantidadeTotal = document.getElementsByName("PedidoQuantidadeTotal");
-        elementosQuantidadeTotal.forEach(el=>{
-            el.innerHTML = data.QuantidadeItens;
-            el.style.visibility = data.QuantidadeItens == 0 ? 'hidden': 'visible';
-        })
+        const elementoQuantidadeTotal = document.getElementById("PedidoQuantidadeTotal");
+        if(elementoQuantidadeTotal){
+            elementoQuantidadeTotal.innerHTML = data.QuantidadeItens;
+            elementoQuantidadeTotal.style.visibility = data.QuantidadeItens == 0 ? 'hidden': 'visible';
+        }
     })
     .finally(() => CloseLoading());
+}
 
+async function ExecutePostCardapioUpdateModalPedidoCliente(acao, id)
+{
+    ShowLoading();
+
+    await ExecutePostCardapio(acao, id);
+
+    await GetModalString('Pedido/Pedidos')
+    .then(strHtml => {
+        const doc = new DOMParser().parseFromString(strHtml, 'text/html');
+        const current = document.querySelector('.modal-content');
+        const currentScroll = current.querySelector('#modal-container-pedidos').scrollTop;
+
+        const modal = doc.body.querySelector('.modal-content');
+        current.innerHTML = modal.innerHTML;
+
+        current.querySelector('#modal-container-pedidos').scrollTop = currentScroll;        
+
+    })
+    .finally(() => CloseLoading());
+}
+
+function AtualizaModoPagamento(tipoPagamento){
+    ShowLoading();
+    GetModalString('Pedido/AtualizarModoPagamento', tipoPagamento)
+    .then(str={})
+    .catch()
+    .finally(()=> CloseLoading());
+}
+
+function ConfirmarPedido()
+{
+    ShowLoading();
+    console.log("confirma o");
+    GetModalString('Pedido/ConfirmarPedido')
+    .then((str)=>{
+        console.log(str);
+        ShowModal(str);
+    })
+    .catch()
+    .finally(()=> CloseLoading());
+}
+
+function ToReal(number)
+{
+    return number.toFixed(2).replace('.', ',');
 }
