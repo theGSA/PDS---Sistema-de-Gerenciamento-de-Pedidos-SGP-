@@ -1,7 +1,6 @@
 const session = require('express-session');
-const Security = require('../Utils/security');
+const Security = require('../Utils/Security');
 const sequelize = require('../Database/db');
-const Sessions = require('../Models/Sessions');
 
 var SequelizeStore = require("connect-session-sequelize")(session.Store);
 

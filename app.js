@@ -14,10 +14,12 @@ const ProdutoController = require('./Controllers/ProdutoController');
 const CardapioController = require('./Controllers/CardapioController');
 const CategoriaController = require('./Controllers/CategoriaController');
 const ClienteController = require('./Controllers/ClienteController');
-const Routes = require('./Config/Routes');
+const Routes = require('./Config/Rotas');
 const Pages = require('./Config/Pages');
 const FuncionarioController = require('./Controllers/FuncionarioController');
 const MesaController = require('./Controllers/MesaController');
+const PageRouteRegister = require('./Controllers/PageRouteRegister');
+const PedidoController = require('./Controllers/PedidoController');
 
 const app = express(); 
 
@@ -37,8 +39,6 @@ app.set('view engine', 'ejs');
 app.use(expressLayout);
 global.Usertype = Usertype;
 
-
-
 app.get(Routes.GET_LOGIN, LoginController.Index);
 app.get(Routes.GET_LOGIN_RECUPERAR_SENHA, LoginController.RecuperarSenha);
 app.get(Routes.GET_LOGIN_CADASTRAR, LoginController.Cadastrar)
@@ -46,6 +46,7 @@ app.get(Routes.GET_LOGIN_CADASTRAR, LoginController.Cadastrar)
 //Cardápio
 app.get('/', CardapioController.Index);
 app.get(Routes.GET_CARDAPIO, CardapioController.Index);
+app.post(Routes.GET_CARDAPIO, CardapioController.Cardapio);
 
 app.post(Routes.POST_AUTH, AuthController.Index);
 app.post(Routes.POST_AUTH_SEM_CADASTRO, AuthController.SemCadastro)
@@ -56,65 +57,21 @@ app.post(Routes.POST_AUTH_RECUPERAR_SENHA, AuthController.RecuperarSenha)
 
 app.get(Routes.GET_HOME, HomeController.Index);
 
-//rotas get de categoria
-app.get(Routes.GET_CATEGORIAS, CategoriaController.Index );
-//categoria
-app.post('/Categoria/GetEditModal', CategoriaController.PostGetEditModal);
-app.post('/Categoria/GetDeleteModal', CategoriaController.PostGetDeleteModal);
-app.post('/Categoria/Cadastrar', CategoriaController.PostCadastrar);
-app.post('/Categoria/Deletar', CategoriaController.PostDeletar);
-
-//rotas get de produto
-app.get(Routes.GET_PRODUTOS, ProdutoController.Index );
-//produtos
-app.post('/Produto/GetEditModal', ProdutoController.PostGetEditModal);
-app.post('/Produto/GetDeleteModal', ProdutoController.PostGetDeleteModal);
-app.post('/Produto/Cadastrar', ProdutoController.PostCadastrar);
-app.post('/Produto/Deletar', ProdutoController.PostDeletar);
-
-//rotas get de clientes
-app.get(Routes.GET_CLIENTES, ClienteController.Index );
-//clientes
-app.post('/Cliente/GetEditModal', ClienteController.PostGetEditModal);
-app.post('/Cliente/GetDeleteModal', ClienteController.PostGetDeleteModal);
-app.post('/Cliente/Cadastrar', ClienteController.PostCadastrar);
-app.post('/Cliente/Deletar', ClienteController.PostDeletar);
-
-//rotas get de funcioanrios
-app.get(Routes.GET_FUNCIONARIOS, FuncionarioController.Index );
-//funcionarios
-app.post('/Funcionario/GetEditModal', FuncionarioController.PostGetEditModal);
-app.post('/Funcionario/GetDeleteModal', FuncionarioController.PostGetDeleteModal);
-app.post('/Funcionario/Cadastrar', FuncionarioController.PostCadastrar);
-app.post('/Funcionario/Deletar', FuncionarioController.PostDeletar);
-
-//mesas get 
-app.get(Routes.GET_MESAS, MesaController.Index );
-//clientes
-app.post('/Mesa/GetEditModal', MesaController.PostGetEditModal);
-app.post('/Mesa/GetDeleteModal', MesaController.PostGetDeleteModal);
-app.post('/Mesa/Cadastrar', MesaController.PostCadastrar);
-app.post('/Mesa/Deletar', MesaController.PostDeletar);
+//Registra as rotas das paginas
+PageRouteRegister.Register(app, Routes.GET_CLIENTE, ClienteController );
+PageRouteRegister.Register(app, Routes.GET_FUNCIONARIO,  FuncionarioController);
+PageRouteRegister.Register(app, Routes.GET_MESA, MesaController);
+PageRouteRegister.Register(app, Routes.GET_PRODUTO, ProdutoController);
+PageRouteRegister.Register(app, Routes.GET_CATEGORIA, CategoriaController);
+PageRouteRegister.Register(app, Routes.GET_PEDIDO, PedidoController);
 
 
-
-app.get('/test/GetEditModal', (req, res)=>{
-    const {Id} = req.body;
-        const cliente = null;//= await Usuario.findByPk(Id);
-        
-        const Usertype = [
-            {Id:1, Descricao: 'Não cadastrado'},
-            {Id:2, Descricao: 'Cliente'},
-            {Id:3, Descricao: 'Funcionário'},
-        ]
-
-        res.render(Pages.PAGE_MODAL_CLIENTE, {Cliente: cliente,Usuario:null, Mensagem:null, Usertype:Usertype, layout: true});
-
-});
+//
+app.post(Routes.POST_CARDAPIO_LOGOUT, CardapioController.ObterModalQuestaoLogout);
+app.post(Routes.POST_PEDIDO_MODAL_PEDIDO_CLIENTE, PedidoController.ObterModalPedidosCliente );
 
 app.post('/', async (req, res)=>{
     const {Action} = req.body;
-
     if(Action == 'DeleteUsers')
     {
         const a  = await Usuario.destroy({where:{}})

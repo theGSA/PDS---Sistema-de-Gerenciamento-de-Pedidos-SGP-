@@ -1,7 +1,7 @@
 
 
 const Pages = require('../Config/Pages');
-const Routes = require('../Config/Routes');
+const Routes = require('../Config/Rotas');
 const Mesa = require('../Models/Mesa');
 const { Mensagem, tipoMensagem } = require('../Models/Mensagem');
 const { Render } = require('./RenderController');
@@ -50,7 +50,7 @@ class MesaController{
         else
             req.session.Mensagem = new Mensagem(tipoMensagem.ERRO, 'Erro ao salvar mesa!');
 
-        res.redirect(Routes.GET_MESAS);
+        res.redirect(Routes.GET_MESA);
     }
 
     async PostDeletar(req, res){
@@ -62,7 +62,7 @@ class MesaController{
         else
             req.session.Mensagem = new Mensagem( tipoMensagem.ERRO, 'Erro ao excluir mesa!');
 
-        res.redirect(Routes.GET_MESAS);
+        res.redirect(Routes.GET_MESA);
 
     }
 }

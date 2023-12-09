@@ -1,11 +1,12 @@
 
 
 const Pages = require('../Config/Pages');
-const Routes = require('../Config/Routes');
+const Routes = require('../Config/Rotas');
 const { Usuario, Usertype} = require('../Models/Usuario');
 const { Mensagem, tipoMensagem } = require('../Models/Mensagem');
 const Sequelize = require('sequelize');
 const { Render } = require('./RenderController');
+
 class ClienteController{
     async Index(req, res){
           
@@ -59,7 +60,7 @@ class ClienteController{
         else
             req.session.Mensagem = new Mensagem(tipoMensagem.SUCCESS, 'Erro ao salvar cliente!');
 
-        res.redirect(Routes.GET_CLIENTES);
+        res.redirect(Routes.GET_CLIENTE);
     }
 
     async PostDeletar(req, res){
@@ -71,7 +72,7 @@ class ClienteController{
         else
             req.session.Mensagem = new Mensagem( tipoMensagem.ERRO, 'Erro ao excluir cliente!');
 
-        res.redirect(Routes.GET_CLIENTES);
+        res.redirect(Routes.GET_CLIENTE);
 
     }
 }

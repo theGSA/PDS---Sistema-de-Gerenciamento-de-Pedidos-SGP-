@@ -2,6 +2,7 @@
 const Sequelize = require('sequelize');
 const db = require('../database/db');
 const Categoria = require('./Categoria');
+const { BlobToBase64Content } = require("../Utils/Utils");
 
 const Produto = db.define('Produto',{
     Id: {
@@ -19,6 +20,9 @@ const Produto = db.define('Produto',{
     Preco: {
         type: Sequelize.FLOAT
     },
+    Quantidade:{
+        type: Sequelize.INTEGER
+    },
     Imagem:{
         type: Sequelize.BLOB
     },
@@ -27,6 +31,12 @@ const Produto = db.define('Produto',{
     },
     NomeImagem : {
         type: Sequelize.TEXT
+    },
+    Imagem64:{
+        type: Sequelize.VIRTUAL,
+        get:function(){
+            return  this.Imagem ? `data:${this.TipoImagem};base64, ${BlobToBase64Content(this.Imagem)}`: null;
+        }
     }
 })
 Produto.belongsTo(Categoria,{

@@ -1,6 +1,6 @@
 
 
-const Routes = require('../Config/Routes');
+const Routes = require('../Config/Rotas');
 const Produto = require('../Models/Produto');
 const { Mensagem, tipoMensagem } = require('../Models/Mensagem');
 const Categoria = require('../Models/Categoria');
@@ -12,7 +12,7 @@ class ProdutoController{
     async Index(req, res){
         const listaProdutos = await Produto.findAll({include: [{model: Categoria}]});
         
-        Render(req, res,Pages.PAGE_PRODUTO, {Produtos : listaProdutos});
+        Render(req, res, Pages.PAGE_PRODUTO, {Produtos : listaProdutos});
     }
 
 
@@ -27,14 +27,14 @@ class ProdutoController{
             produto.Imagem64 = `data:${produto.TipoImagem};base64, ${BlobToBase64Content(produto.Imagem)}`;
         }
     
-        Render(req, res,Pages.PAGE_PARTIALS_MODAL_PRODUTO, {Produto: produto, Categorias:categorias, layout: false});
+        Render(req, res,Pages.PAGE_MODAL_PRODUTO, {Produto: produto, Categorias:categorias, layout: false});
     }
 
     async PostGetDeleteModal(req, res){
         const {Id} = req.body;
         const produto = await Produto.findByPk(Id);
 
-        produto.Rota = 'Produto/Deletar';
+        produto.Rota = Routes.POST_PRODUTO_DELETAR;
         Render(req, res,Pages.PAGE_PARTIALS_MODAL_DELETAR, {Model: produto,  layout: false});
     }
 
@@ -44,18 +44,18 @@ class ProdutoController{
         var objRes = null;
 
         if(req.files && req.files.Imagem){
+            //guarda a imagem mandada pelo formulário
             req.body.Imagem = req.files.Imagem.data;
             req.body.NomeImage = req.files.Imagem.name;
             req.body.TipoImagem = req.files.Imagem.mimetype;
         }
-        else if(Id > 0){
-            const p = await Produto.findByPk(Id);
-            req.body.Imagem = p.Imagem;
-            req.body.NomeImage = p.NomeImage;
-            req.body.TipoImagem = p.TipoImagem;
-        }
-
-        console.log(req.body.Imagem);
+        // else if(Id > 0){
+        //     //caso contrario
+        //     const p = await Produto.findByPk(Id);
+        //     req.body.Imagem = p.Imagem;
+        //     req.body.NomeImage = p.NomeImage;
+        //     req.body.TipoImagem = p.TipoImagem;
+        // }
 
         if(Id > 0)
             objRes = await Produto.update(req.body, {where:{Id: Id}});
@@ -68,7 +68,7 @@ class ProdutoController{
         else
             req.session.Mensagem = new Mensagem(tipoMensagem.ERRO, 'Erro ao salvar produto!');
 
-        res.redirect(Routes.POST_PRODUTO);
+        res.redirect(Routes.GET_PRODUTO);
     }
 
     async PostDeletar(req, res){
@@ -80,7 +80,7 @@ class ProdutoController{
         else
             req.session.Mensagem = new Mensagem( tipoMensagem.ERRO, 'Erro ao excluir produto!');
 
-        res.redirect(Routes.GET_PRODUTOS);
+        res.redirect(Routes.GET_PRODUTO);
 
     }
 }

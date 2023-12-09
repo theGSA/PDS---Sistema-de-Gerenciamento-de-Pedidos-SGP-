@@ -1,0 +1,23 @@
+
+<div class="container-card-item">
+    <div class="" style="width: fit-content;">
+        <img style="min-width: 70px; height: max-content; max-height: 12vh;  max-width: 12vh;" src="<%= PedidoProduto?.Produto?.Imagem64 ?? 'img/imagem_produto_padrao.png' %>" alt="imagem padrão do produto" >
+    </div>
+    <div class="container-item-conteudo">
+        <div class="container-produtor-descricao">
+            <div class="ft-title"><%= PedidoProduto?.Produto?.Nome %></div>
+            <i class="produto-descricao"><%= PedidoProduto?.Produto?.Descricao %></i>
+        </div>
+        <div class="container-preco-quantidade">
+            <div class="d-flex flex-column">
+                <i style="min-width: 70px;"><%= `R$ ${PedidoProduto?.ValorUnitario ? PedidoProduto.ValorUnitario.toFixed(2).replace('.',',') : '0,00' } x${PedidoProduto?.Quantidade}` %></i>
+                <i style="font-size: smaller; min-width: 70px;"> Total: <span>$ <%= `${PedidoProduto?.ValorTotal.toFixed(2).replace('.',',')}` %></span></i>
+            </div>
+            <div class="container-quantidade">
+                <i onclick="ExecutePostCardapio('remover','<%= PedidoProduto.IdProduto %>' )" class="bi-dash bg-danger btn-minus"></i>
+                <a name="<%= `produto_${PedidoProduto?.IdProduto}` %>" class="text-dark text-decoration-none text-produto-quantidade"><%= PedidoProduto?.Quantidade ?? 0 %></a>
+                <i onclick="ExecutePostCardapio('adicionar','<%= PedidoProduto.IdProduto %>' )" class="bi-plus bg-green btn-plus"></i>
+            </div>
+        </div>
+    </div>
+</div>

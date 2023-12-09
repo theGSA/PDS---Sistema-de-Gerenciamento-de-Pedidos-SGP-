@@ -43,13 +43,14 @@
 }
 
 
-.container-preco{
-    padding: 10px;
+.container-preco-quantidade{
+    padding: 10px 0px;
     font-size: 1rem;
     font-weight: bold;
     display: flex;
-    flex-flow: row nowrap;
+    flex-flow: row wrap;
     justify-content: space-between;
+    gap: 5px;
 }
 
 .btn-minus{
@@ -73,6 +74,7 @@
     align-self: end;
     align-items: center;
     gap: .5rem;
+    min-width: 90px;
 }
 
 .ft-title{
@@ -93,6 +95,8 @@
     display: flex; 
     justify-content: center; 
     align-items: center;
+    cursor: pointer !important;
+    border: none;
 }
 
 .container-categoria{
