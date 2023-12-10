@@ -132,6 +132,10 @@ table > thead > tr :last-child
     height: 1.5rem;
     pointer-events: none;
     background-color: #3EA80C;
+    text-shadow: 1px 1px 1px gray;
+    border-radius: 50%;
+    position: absolute;
+    transform: translate(10px, -15px);
 }
 
 .img-produto{
@@ -159,4 +163,12 @@ table > thead > tr :last-child
   #loading-image {
     z-index: 100;
     user-select: none;
+  }
+
+  .visibility-visible{
+    visibility: visible;
+  }
+
+  .visibility-hidden{
+    visibility: hidden;
   }

@@ -31,7 +31,7 @@ app.use(fileUpload());
 app.use(session);
 app.use(Authentication.isAuthenticated);
 app.use(function(req, res, next){
-    global.active = req.path.split('/')[1] // [0] will be empty since routes start with '/'
+    global.active = req.path.split('/')[1];
     next();
 });
 

@@ -144,7 +144,9 @@ async function ExecutePostCardapio(acao, id)
             elem.forEach(el => el.innerHTML = pedidoProduto.Quantidade )
         }
         const elementoQuantidadeTotal = document.getElementById("PedidoQuantidadeTotal");
+        console.log(elementoQuantidadeTotal);
         if(elementoQuantidadeTotal){
+            console.log(data.QuantidadeItens);
             elementoQuantidadeTotal.innerHTML = data.QuantidadeItens;
             elementoQuantidadeTotal.style.visibility = data.QuantidadeItens == 0 ? 'hidden': 'visible';
         }

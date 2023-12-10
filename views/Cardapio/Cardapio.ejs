@@ -18,11 +18,11 @@
         
             <!-- <i class="bi-pencil" style="position: absolute; top: 4px;" ></i> -->
             <button onclick="ShowModalByPost(this, 'Pedido/Pedidos')" style="width: 35px; height:35px; font-size: 80%;" class="container-carrinho bi bi-cart align-self-center text-white">
-                <% if(totalProdutos > 0) {%>
-                    <a id="PedidoQuantidadeTotal" class="notificacao-carrinho" style="text-shadow: 1px 1px 1px gray; border-radius: 50%; position: absolute; transform: translate(10px, -15px);" >
+                <% const visibilityClass = totalProdutos > 0 ? 'visibility-visible' : 'visibility-hidden';  %>
+                    <a id="PedidoQuantidadeTotal" class="notificacao-carrinho <%= visibilityClass %>" >
                         <%= totalProdutos %>
                     </a>
-                <% } %>
+                
             </button>  
             <!-- </div> -->
         </div>
@@ -37,7 +37,7 @@
             </div>
             <div id="categoria_<%= categoria.Id %>"  style="transform: translateY(-5px);" class="collapse show container-items-cardapio">
                 <% categoria.Produtos.forEach(element=> { %>             
-                    <%- include('../partials/CardProduto' , {element:element}) %>
+                    <%- include('../Partials/CardProduto' , {element:element}) %>
                 <% })%>
             </div>
         </div>

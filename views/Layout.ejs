@@ -1,14 +1,14 @@
 
 <!DOCTYPE html>
 <html lang="pt-BR">
-<%- include('partials/head') %>
+<%- include('Partials/head') %>
 <body class="bg-white" style="height: 100vh;">
-    <%- include('partials/Mensagem') %>
+    <%- include('Partials/Mensagem') %>
     <div class="container-fluid" style="height: 100%;">
         <div class="row flex-nowrap" style="height: 100%;">
             <% if(typeof(Page) != 'undefined'){%>
                 <% if( !['login', 'cadastrar'].includes(Page)) {%>
-                    <%- include('partials/header')%>
+                    <%- include('Partials/header')%>
                 <% } %>
             <% } %>
 

@@ -1,6 +1,6 @@
 
 const Sequelize = require('sequelize');
-const db = require('../database/db');
+const db = require('../Database/db');
 const Categoria = require('./Categoria');
 const { BlobToBase64Content } = require("../Utils/Utils");
 
