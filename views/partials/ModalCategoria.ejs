@@ -8,17 +8,17 @@
             </div>
             <div class="modal-body">
                     <div class=" d-flex justify-content-between">
-                        <div class="mb-3 col-3">
-                            <label for="Id" class="col-form-label">ID:</label>
+                        <div class="mb-1 col-3">
+                            <label for="Id" >ID:</label>
                             <input type="text" class="form-control" value="<%= Categoria?.Id %>" id="Id" name="Id" readonly>
                         </div>
                     </div>
-                    <div class="mb-3">
-                        <label for="Nome" class="col-form-label">Nome:</label>
+                    <div class="mb-1">
+                        <label for="Nome" >Nome:</label>
                         <input type="text" class="form-control" id="Nome" name="Nome" value="<%= Categoria?.Nome %>">
                     </div>
-                    <div class="mb-3">
-                        <label for="Descricao" class="col-form-label">Descrição:</label>
+                    <div class="mb-1">
+                        <label for="Descricao" >Descrição:</label>
                         <textarea class="form-control" id="Descricao" name="Descricao"><%= Categoria?.Descricao %></textarea>
                     </div>
             </div>

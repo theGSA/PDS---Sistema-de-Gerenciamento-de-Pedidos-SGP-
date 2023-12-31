@@ -172,3 +172,8 @@ table > thead > tr :last-child
   .visibility-hidden{
     visibility: hidden;
   }
+
+  .form-control
+  {
+    padding: 3px;
+  }
