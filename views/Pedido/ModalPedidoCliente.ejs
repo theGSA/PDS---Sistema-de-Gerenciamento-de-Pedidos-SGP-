@@ -1,18 +1,30 @@
+<% 
+    const bCarrinhoVazio = Pedido?.QuantidadeItens == 0;
+
+%>
+
+
 <div class="modal fade" id="Modal" tabindex="-1" aria-labelledby="DeleteModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header bg-danger">
-                <h5 class="modal-title text-light" Id="DeleteModalLabel"><i class="bi bi-cart"></i>Carrinho</h5>
+                <h5 class="modal-title text-light" Id="DeleteModalLabel">
+                    <i class="bi bi-cart pe-1"></i>
+                    Carrinho
+                </h5>
                 <button type="button" class="btn-close bg-light" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body" style="height: 400px; overflow:hidden;">
                 <div id="modal-container-pedidos" class="d-flex flex-column gap-2" style="height: 70%; overflow-y: auto;">
-
-                    <% for(var pedidoProduto of Pedido?.PedidoProdutos) { %>
-                        <% if(pedidoProduto.Quantidade > 0){  %>
-                            <%- include('CardProduto', {PedidoProduto: pedidoProduto}) %>
-                        <% } %> 
-                    <% } %>
+                    <% if(!bCarrinhoVazio) {%>
+                        <% for(var pedidoProduto of Pedido?.PedidoProdutos) { %>
+                            <% if(pedidoProduto.Quantidade > 0){  %>
+                                <%- include('CardProduto', {PedidoProduto: pedidoProduto}) %>
+                            <% } %> 
+                        <% } %>
+                    <% }else{%>
+                        <h2>Carrinho vazio.</h2>
+                    <% }%>
                 </div>
                 <div class="d-flex flex-row rounded-2 gap-4" style="margin: 1rem 0 .5rem; padding: .5rem; border: 1px solid grey;" id="">
                     <a style="padding: 0 5px; text-decoration: none; position: absolute; background-color: white; transform: translate(0, -20px);" >Forma de Pagamento</a>
@@ -20,8 +32,8 @@
                     
                     for(var modPagamento of ModosPagamento ){%>    
                         <div class="form-check">
-                            <input class="form-check-input" onchange="AtualizaModoPagamento('<%= modPagamento.id %>')" id="<%= `PagamentoPix${modPagamento.id}` %>" type="radio" name="ModoPagamento" value="<%= modPagamento.id %>" <%= modPagamento.id == Pedido?.ModoPagamento ? 'checked':'' %>>
-                            <label class="form-check-label" for="<%= `PagamentoPix${modPagamento.id}` %>"><%= modPagamento.nome %></label>  
+                            <input class="form-check-input" id="<%= `Pagamento${modPagamento.id}` %>" onchange="AtualizaModoPagamento('<%= modPagamento.id %>')" <%= bCarrinhoVazio ? 'disabled':'' %> type="radio" name="ModoPagamento" value="<%= modPagamento.id %>" <%= modPagamento.id == Pedido?.ModoPagamento ? 'checked':'' %>>
+                            <label class="form-check-label" for="<%= `Pagamento${modPagamento.id}` %>"><%= modPagamento.nome %></label>  
                         </div>
                     <%}%>
 
@@ -33,7 +45,7 @@
             </div>
             <div class="modal-footer" >
                 <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Voltar</button>
-                <button onclick="ConfirmarPedido()" data-bs-dismiss="modal" class="btn btn-success">Confirmar</button>
+                <button onclick="ConfirmarPedido()" data-bs-dismiss="modal" <%= bCarrinhoVazio ? 'disabled':'' %>  class="btn btn-success">Confirmar</button>
             </div>
         </div>
     </div>
